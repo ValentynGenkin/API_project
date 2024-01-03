@@ -5,6 +5,6 @@ dotenv.config();
 
 const client = new MongoClient(process.env.MONGO_URL);
 
-const connectDB = () => client.connect();
+const connectDB = async () => client.connect();
 
 export default connectDB;
