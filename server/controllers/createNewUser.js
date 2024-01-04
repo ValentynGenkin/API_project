@@ -1,17 +1,49 @@
 import { v4 as uuid } from 'uuid';
 import User from '../db/models/userModel.js';
 
-export const createNewUser = (req, res) => {
-  const { name, lastName, email, password, berthDay, phone } = req.body;
-  if (name && lastName && email && password && berthDay && phone) {
-    const user = {
-      name,
+export const createNewUser = async (req, res) => {
+  const APIkey = await uuid();
+
+  const { firstName, lastName, email, password, birthday, phone } = req.body;
+
+  if (!firstName || !lastName || !email || !password || !birthday || !phone) {
+    return res.status(400).json({
+      msg: 'Missing required fields',
+      fields: {
+        firstName: 'name',
+        lastName: 'last name',
+        email: 'e-mail',
+        password: 'password',
+        birthday: 'yyyy-mm-dd',
+        phone: 'phone number',
+      },
+    });
+  }
+
+  const emailCheck = await User.findOne({ email: email });
+
+  if (emailCheck) {
+    return res.status(400).json({
+      msg: 'Used email already registered',
+    });
+  } else {
+    const user = await User.create({
+      firstName,
       lastName,
       email,
       password,
-      berthDay,
+      birthday,
       phone,
-      API_key: uuid,
-    };
+      APIkey,
+    });
+
+    const userObject = user.toObject();
+
+    delete userObject.password;
+
+    return res.status(201).json({
+      msg: 'new user created',
+      user: userObject,
+    });
   }
 };

@@ -17,17 +17,20 @@ const userSchema = new mongoose.Schema({
   },
   phone: {
     type: String,
-    required: false,
+    required: true,
   },
   birthday: {
     type: Date,
-    required: false,
+    required: true,
   },
   password: {
     type: String,
     minlength: [6, 'Please enter a valid password'],
     required: [true, 'Please enter a valid password'],
     select: false,
+  },
+  APIkey: {
+    type: String,
   },
 });
 
