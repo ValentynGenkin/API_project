@@ -1,10 +1,8 @@
-import { MongoClient } from 'mongodb';
+import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 
 dotenv.config();
 
-const client = new MongoClient(process.env.MONGO_URL);
-
-const connectDB = async () => client.connect();
+const connectDB = async () => mongoose.connect(process.env.MONGO_URL);
 
 export default connectDB;
