@@ -5,7 +5,7 @@ export const login = async (req, res) => {
   const { email, password } = req.body;
 
   const comparePassword = (password, hashedPassword) => {
-    return bcrypt.compareSync(password, comparePassword);
+    return bcrypt.compareSync(password, hashedPassword);
   };
 
   if (!email || !password) {
