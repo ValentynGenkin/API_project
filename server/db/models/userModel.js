@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
 
 const userSchema = new mongoose.Schema({
   firstName: {
@@ -13,7 +14,7 @@ const userSchema = new mongoose.Schema({
   email: {
     type: String,
     required: true,
-    unique: [true, 'try another email'],
+    unique: true,
   },
   phone: {
     type: String,
@@ -21,7 +22,7 @@ const userSchema = new mongoose.Schema({
   },
   birthday: {
     type: Date,
-    required: true,
+    required: [true, 'Check date format'],
   },
   password: {
     type: String,
@@ -31,8 +32,28 @@ const userSchema = new mongoose.Schema({
   },
   APIkey: {
     type: String,
+    required: true,
   },
 });
+
+userSchema.methods.createJWTToken = function () {
+  const { JWT_SECRET_KEY, JWT_EXPIRE } = process.env;
+
+  if (!JWT_SECRET_KEY || !JWT_EXPIRE) {
+    throw new Error('JWT configuration is incomplete');
+  }
+
+  try {
+    const userObj = {
+      id: this._id,
+    };
+    const token = jwt.sign(userObj, JWT_SECRET_KEY, { expiresIn: JWT_EXPIRE });
+    return token;
+  } catch (error) {
+    console.error('Error creating JWT token:', error);
+    throw new Error('Failed to create JWT token');
+  }
+};
 
 userSchema.pre('save', async function (next) {
   try {

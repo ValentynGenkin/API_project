@@ -43,7 +43,7 @@ export const createNewUser = async (req, res) => {
       delete userObject.password;
 
       return res.status(201).json({
-        msg: 'new user created',
+        msg: 'New user created',
         user: userObject,
       });
     }
@@ -51,6 +51,7 @@ export const createNewUser = async (req, res) => {
     console.error('Error creating user', error);
     return res.status(500).json({
       msg: 'Internal Server Error',
+      error: error.message,
     });
   }
 };
