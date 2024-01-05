@@ -1,16 +1,12 @@
-import bcrypt from 'bcryptjs';
 import User from '../db/models/userModel.js';
 import dotenv from 'dotenv';
+import { comparePassword } from '../util/comparePassword.js';
 
 dotenv.config();
 
 export const login = async (req, res) => {
   try {
     const { email, password } = req.body;
-
-    const comparePassword = (password, hashedPassword) => {
-      return bcrypt.compareSync(password, hashedPassword);
-    };
 
     if (!email || !password) {
       return res.status(400).json({

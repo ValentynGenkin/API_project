@@ -47,7 +47,6 @@ userSchema.methods.createJWTToken = function () {
     const userObj = {
       id: this._id,
     };
-    console.log(userObj);
     const token = jwt.sign(userObj, JWT_SECRET_KEY, { expiresIn: JWT_EXPIRE });
     return token;
   } catch (error) {
