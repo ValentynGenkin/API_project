@@ -1,6 +1,6 @@
-import User from '../db/models/userModel.js';
-import { comparePassword } from '../util/comparePassword.js';
-import { verifyToken } from '../util/verifyToken.js';
+import User from '../../db/models/userModel.js';
+import { comparePassword } from '../../util/comparePassword.js';
+import { verifyToken } from '../../util/verifyToken.js';
 
 export const deleteUser = async (req, res) => {
   try {
@@ -51,7 +51,7 @@ export const deleteUser = async (req, res) => {
         msg: `User with id: ${id.id} deleted`,
       });
   } catch (error) {
-    console.error('Deleting user error', error);
+    console.error('User deletion error', error);
     return res.status(500).json({
       msg: 'Internal Server Error',
       error: error.message,

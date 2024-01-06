@@ -1,6 +1,6 @@
-import User from '../db/models/userModel.js';
+import User from '../../db/models/userModel.js';
 import dotenv from 'dotenv';
-import { comparePassword } from '../util/comparePassword.js';
+import { comparePassword } from '../../util/comparePassword.js';
 
 dotenv.config();
 

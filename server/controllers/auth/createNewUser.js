@@ -1,5 +1,5 @@
 import { v4 as uuid } from 'uuid';
-import User from '../db/models/userModel.js';
+import User from '../../db/models/userModel.js';
 
 export const createNewUser = async (req, res) => {
   const APIkey = uuid();

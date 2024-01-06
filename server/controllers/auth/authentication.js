@@ -1,6 +1,6 @@
 import dotenv from 'dotenv';
-import { verifyToken } from '../util/verifyToken.js';
-import User from '../db/models/userModel.js';
+import { verifyToken } from '../../util/verifyToken.js';
+import User from '../../db/models/userModel.js';
 
 dotenv.config();
 

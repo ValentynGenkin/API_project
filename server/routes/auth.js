@@ -1,9 +1,9 @@
 import express from 'express';
-import { createNewUser } from '../controllers/createNewUser.js';
-import { login } from '../controllers/login.js';
-import { logout } from '../controllers/logout.js';
-import { authentication } from '../controllers/authentication.js';
-import { deleteUser } from '../controllers/deleteUser.js';
+import { createNewUser } from '../controllers/auth/createNewUser.js';
+import { login } from '../controllers/auth/login.js';
+import { logout } from '../controllers/auth/logout.js';
+import { authentication } from '../controllers/auth/authentication.js';
+import { deleteUser } from '../controllers/auth/deleteUser.js';
 
 const authRouter = express.Router();
 
