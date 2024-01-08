@@ -1,6 +1,7 @@
 import dotenv from 'dotenv';
 import { verifyToken } from '../../util/verifyToken.js';
 import User from '../../db/models/userModel.js';
+import { createNewSchema } from '../../util/schemaCreator.js';
 
 dotenv.config();
 
@@ -28,7 +29,6 @@ export const authentication = async (req, res) => {
         msg: 'User not found',
       });
     }
-
     return res.status(200).json(user);
   } catch (error) {
     console.error('Authentication error', error);
