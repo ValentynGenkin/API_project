@@ -1,12 +1,10 @@
-import dotenv from 'dotenv';
+import { createNewSchema } from '../../util/schemaCreator.js';
 import { verifyToken } from '../../util/verifyToken.js';
-import User from '../../db/models/userModel.js';
 
-dotenv.config();
-
-export const authentication = async (req, res) => {
+export const createSchema = async (req, res) => {
   try {
     const token = req.cookies?.customer_access;
+    const { schemaName, data } = req.body;
 
     if (!token) {
       return res.status(403).json({
@@ -21,17 +19,22 @@ export const authentication = async (req, res) => {
         msg: 'Invalid or expired token',
       });
     }
-    const user = await User.findOne({ _id: id.id });
 
-    if (!user) {
-      return res.status(404).json({
-        msg: 'User not found',
+    if (!schemaName || !data) {
+      return res.status(400).json({
+        msg: 'Missing required fields',
       });
     }
 
-    return res.status(200).json(user);
+    if (typeof schemaName === 'string') {
+      await createNewSchema(id.id, schemaName, data);
+    }
+    return res.status(200).json({
+      mgs: 'Schema created',
+      schema: data,
+    });
   } catch (error) {
-    console.error('Authentication error', error);
+    console.error('Error creating schema', error);
     return res.status(500).json({
       msg: 'Internal Server Error',
       error: error.message,

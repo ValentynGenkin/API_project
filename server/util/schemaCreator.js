@@ -6,21 +6,28 @@ export const createNewSchema = async (userId, schemaName, data) => {
     const filePath = `${folderPath}/${schemaName}.js`;
 
     await mkdir(folderPath, { recursive: true });
+    const dataToSTring = JSON.stringify(data);
+    const preparedData = dataToSTring.replace(/["']/g, '');
 
     const schemaData = `
     import mongoose from 'mongoose';
 
-    const ${userId}Schema = new mongoose.Schema({
+    const ${schemaName}Schema = new mongoose.Schema(
 
-      ${data}
-      
-    });
-    const userId = mongoose.model("${userId}", ${userId}Schema);
+      ${preparedData}
 
-    export default ${userId}Schema;
+    );
+    const id_${userId} = mongoose.model("${userId}", ${schemaName}Schema);
+
+    export default id_${userId};
     `;
 
     await writeFile(filePath, schemaData, 'utf-8');
+
+    return {
+      success: true,
+      message: 'Schema created successfully',
+    };
   } catch (error) {
     console.error('Error creating schema file:', error);
     throw error;
