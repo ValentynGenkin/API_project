@@ -1,10 +1,17 @@
-import { createNewSchema } from '../../util/schemaCreator.js';
+import { endpointsCreator } from '../../util/endpointsCreator.js';
 import { verifyToken } from '../../util/verifyToken.js';
 
-export const createSchema = async (req, res) => {
+export const createEndpoints = async (req, res) => {
   try {
     const token = req.cookies?.customer_access;
-    const { schemaName, data } = req.body;
+
+    const { endpointName } = req.body;
+
+    if (!endpointName) {
+      return res.status(400).json({
+        msg: 'Missing required fields',
+      });
+    }
 
     if (!token) {
       return res.status(403).json({
@@ -19,21 +26,9 @@ export const createSchema = async (req, res) => {
         msg: 'Invalid or expired token',
       });
     }
-
-    if (!schemaName || !data) {
-      return res.status(400).json({
-        msg: 'Missing required fields',
-      });
-    }
-
-    await createNewSchema(id, schemaName, data);
-
-    return res.status(200).json({
-      mgs: 'Schema created',
-      schema: data,
-    });
+    await endpointsCreator(endpointName, id);
   } catch (error) {
-    console.error('Error creating schema', error);
+    console.error('Error creating endpoints', error);
     return res.status(500).json({
       msg: 'Internal Server Error',
       error: error.message,
