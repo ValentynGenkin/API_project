@@ -26,9 +26,8 @@ export const createSchema = async (req, res) => {
       });
     }
 
-    if (typeof schemaName === 'string') {
-      await createNewSchema(id.id, schemaName, data);
-    }
+    await createNewSchema(id.id, schemaName, data);
+
     return res.status(200).json({
       mgs: 'Schema created',
       schema: data,

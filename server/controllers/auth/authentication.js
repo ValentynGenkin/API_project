@@ -14,14 +14,14 @@ export const authentication = async (req, res) => {
       });
     }
 
-    const id = verifyToken(token);
+    const id = await verifyToken(token);
 
     if (!id) {
       return res.status(403).json({
         msg: 'Invalid or expired token',
       });
     }
-    const user = await User.findOne({ _id: id.id });
+    const user = await User.findOne({ _id: id });
 
     if (!user) {
       return res.status(404).json({

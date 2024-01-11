@@ -1,18 +1,18 @@
-import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
+import * as jose from 'jose';
 
 dotenv.config();
 
-export const verifyToken = (token) => {
-  const { JWT_SECRET_KEY } = process.env;
+export const verifyToken = async (token) => {
+  try {
+    const { ENCRYPTION_KEY } = process.env;
 
-  const result = jwt.verify(token, JWT_SECRET_KEY, (err, decoded) => {
-    if (err) {
-      return false;
-    }
+    const secret = jose.base64url.decode(ENCRYPTION_KEY);
+    const { payload: userObj } = await jose.jwtDecrypt(token, secret);
 
-    return { id: decoded.id };
-  });
-
-  return result;
+    return userObj.id;
+  } catch (error) {
+    console.error('JWT Token error', error.message);
+    throw error;
+  }
 };

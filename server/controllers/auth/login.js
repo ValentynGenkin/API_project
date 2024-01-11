@@ -30,7 +30,9 @@ export const login = async (req, res) => {
       .status(200)
       .cookie('customer_access', token, {
         httpOnly: true,
-        expires: new Date(Date.now() + parseInt(process.env.JWT_COOKIE) * 1000),
+        expires: new Date(
+          Date.now() + parseInt(process.env.JWE_EXPIRE_TIME) * 1000,
+        ),
         secure: false,
       })
       .json({ userObject });
