@@ -1,5 +1,6 @@
 import { APIkeyControl } from '../../util/APIKeyControl.js';
 import { DBModelImport } from '../../util/DBModelImport.js';
+import { verifyToken } from '../../util/verifyToken.js';
 
 export const addItem = async (req, res) => {
   try {
@@ -9,6 +10,14 @@ export const addItem = async (req, res) => {
 
     const endpoint = req.params.endpoint;
 
+    const token = req.cookies?.customer_access;
+
+    if (!endpoint) {
+      return res.status(400).json({
+        msg: 'Endpoint is missing',
+      });
+    }
+
     if (!apiKey) {
       return res.status(401).json({
         msg: 'API key is missing',
@@ -17,7 +26,19 @@ export const addItem = async (req, res) => {
 
     const userData = await APIkeyControl(apiKey);
 
-    if (userData.success === true && userData.user.endpointName === endpoint) {
+    const tokenID = await verifyToken(token);
+
+    if (!userData.user.endpointName || !userData.user.schemaName) {
+      return res.status(400).json({
+        msg: 'Schema and/or endpoints not created',
+      });
+    }
+
+    if (
+      userData.success === true &&
+      userData.user.endpointName === endpoint &&
+      tokenID === userData.user.id.toString()
+    ) {
       const DBModel = await DBModelImport(
         userData.user.id,
         userData.user.schemaName,

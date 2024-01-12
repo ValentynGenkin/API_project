@@ -36,11 +36,11 @@ const userSchema = new mongoose.Schema({
   },
   endpointName: {
     type: String,
-    require: true,
+    require: false,
   },
   schemaName: {
     type: String,
-    require: true,
+    require: false,
   },
 });
 

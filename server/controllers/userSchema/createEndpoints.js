@@ -26,6 +26,15 @@ export const createEndpoints = async (req, res) => {
         msg: 'Invalid or expired token',
       });
     }
+
+    const endpointCheck = await User.findOne({ endpointName: endpointName });
+
+    if (endpointCheck) {
+      return res.status(409).json({
+        msg: 'Provided endpoint already exist',
+      });
+    }
+
     await User.updateOne({ _id: id }, { $set: { endpointName: endpointName } });
 
     return res.status(200).json({
