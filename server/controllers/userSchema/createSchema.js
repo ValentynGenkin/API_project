@@ -1,3 +1,4 @@
+import User from '../../db/models/userModel.js';
 import { createNewSchema } from '../../util/schemaCreator.js';
 import { verifyToken } from '../../util/verifyToken.js';
 
@@ -27,6 +28,8 @@ export const createSchema = async (req, res) => {
     }
 
     await createNewSchema(id, schemaName, data);
+
+    await User.updateOne({ _id: id }, { $set: { schemaName: schemaName } });
 
     return res.status(200).json({
       mgs: 'Schema created',

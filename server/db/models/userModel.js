@@ -34,6 +34,14 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  endpointName: {
+    type: String,
+    require: true,
+  },
+  schemaName: {
+    type: String,
+    require: true,
+  },
 });
 
 userSchema.methods.createJWTToken = async function () {

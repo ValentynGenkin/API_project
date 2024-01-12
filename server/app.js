@@ -2,6 +2,7 @@ import express from 'express';
 import authRouter from './routes/auth.js';
 import cookieParser from 'cookie-parser';
 import schemaRouter from './routes/schema.js';
+import usersRouter from './routes/usersRoutes.js';
 
 const app = express();
 
@@ -11,6 +12,9 @@ app.use(cookieParser());
 
 app.use('/api/auth', authRouter);
 app.use('/api/schema', schemaRouter);
+
+app.use('/api/custom-rout', usersRouter);
+
 // app.use('/api/collection');
 // app.use('/api/admin');
 

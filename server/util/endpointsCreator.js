@@ -5,7 +5,6 @@ export const endpointsCreator = async (endpointName, userId) => {
   const sampleFilePath = './routes/routsCreatedByUsers/sample/sample.js';
   const newFilePath = `./routes/routsCreatedByUsers/${userId}/${userId}.js`;
   const wordToReplace = 'name';
-  const newWord = endpointName;
 
   try {
     await mkdir(path.dirname(newFilePath), { recursive: true });
@@ -15,7 +14,7 @@ export const endpointsCreator = async (endpointName, userId) => {
     const fileContent = await readFile(newFilePath, 'utf-8');
     const updatedContent = fileContent.replace(
       new RegExp(wordToReplace, 'g'),
-      newWord,
+      endpointName,
     );
     await writeFile(newFilePath, updatedContent, 'utf-8');
 

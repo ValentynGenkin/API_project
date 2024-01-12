@@ -1,6 +1,6 @@
 import express from 'express';
-import { createSchema } from '../controllers/schema/createSchema.js';
-import { createEndpoints } from '../controllers/schema/createEndpoints.js';
+import { createSchema } from '../controllers/userSchema/createSchema.js';
+import { createEndpoints } from '../controllers/userSchema/createEndpoints.js';
 
 const schemaRouter = express.Router();
 
