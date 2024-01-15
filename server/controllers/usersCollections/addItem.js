@@ -12,6 +12,12 @@ export const addItem = async (req, res) => {
 
     const token = req.cookies?.customer_access;
 
+    if (!token) {
+      return res.status(403).json({
+        msg: 'Token not provided',
+      });
+    }
+
     if (!endpoint) {
       return res.status(400).json({
         msg: 'Endpoint is missing',

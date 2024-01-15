@@ -4,7 +4,7 @@ import { verifyToken } from '../../util/verifyToken.js';
 
 export const createSchema = async (req, res) => {
   try {
-    const token = req.cookies?.customer_access;
+    const token = req.cookies.customer_access;
     const { schemaName, data } = req.body;
 
     if (!token) {
