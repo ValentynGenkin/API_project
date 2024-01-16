@@ -53,10 +53,14 @@ export const getItems = async (req, res) => {
 
       return res
         .status(200)
-        .json({ data: Array.isArray(data) ? data : [data] });
+        .json(
+          (data && data !== null) || (data && data.length !== 0)
+            ? { data: Array.isArray(data) ? data : [data] }
+            : { msg: 'Not found' },
+        );
     }
   } catch (error) {
-    console.error('Error fetching data');
+    console.error('Error fetching data', error.message);
     return res.status(500).json({
       msg: 'Internal Server Error',
     });

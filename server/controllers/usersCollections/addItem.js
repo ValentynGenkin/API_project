@@ -10,7 +10,7 @@ export const addItem = async (req, res) => {
 
     const endpoint = req.params.endpoint;
 
-    const token = req.cookies?.customer_access;
+    const token = req.cookies.customer_access;
 
     if (!token) {
       return res.status(403).json({
