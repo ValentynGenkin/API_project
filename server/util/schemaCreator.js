@@ -15,7 +15,7 @@ export const createNewSchema = async (userId, schemaName, data) => {
     const ${schemaName}Schema = new mongoose.Schema(
 
       ${preparedData}
-
+      , { versionKey: false }
     );
     const id_${userId} = mongoose.model("${userId}", ${schemaName}Schema);
 

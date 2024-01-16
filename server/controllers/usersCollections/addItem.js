@@ -32,6 +32,12 @@ export const addItem = async (req, res) => {
 
     const userData = await APIkeyControl(apiKey);
 
+    if (!userData.success) {
+      return res.status(401).json({
+        msg: userData.message,
+      });
+    }
+
     const tokenID = await verifyToken(token);
 
     if (!userData.user.endpointName || !userData.user.schemaName) {
@@ -41,7 +47,7 @@ export const addItem = async (req, res) => {
     }
 
     if (
-      userData.success === true &&
+      userData.success &&
       userData.user.endpointName === endpoint &&
       tokenID === userData.user.id.toString()
     ) {
