@@ -1,7 +1,8 @@
+import mongoose from 'mongoose';
 import { APIkeyControl } from '../../util/APIKeyControl.js';
 import { DBModelImport } from '../../util/DBModelImport.js';
 
-export const getAllItems = async (req, res) => {
+export const getItems = async (req, res) => {
   try {
     const apiKey = req.headers.authorization?.split(' ')[1];
 
@@ -16,6 +17,14 @@ export const getAllItems = async (req, res) => {
     if (!endpoint) {
       return res.status(400).json({
         msg: 'Endpoint is missing',
+      });
+    }
+
+    const { id } = req.query;
+
+    if (id && !mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({
+        msg: 'Invalid item ID',
       });
     }
 
@@ -40,15 +49,16 @@ export const getAllItems = async (req, res) => {
       );
       const model = DBModel.default;
 
-      const data = await model.find({});
+      const data = id ? await model.findById(id) : await model.find({});
 
-      return res.status(200).json({ data });
+      return res
+        .status(200)
+        .json({ data: Array.isArray(data) ? data : [data] });
     }
   } catch (error) {
-    console.error('Error fetching data', error);
+    console.error('Error fetching data');
     return res.status(500).json({
       msg: 'Internal Server Error',
-      error: error.message,
     });
   }
 };
