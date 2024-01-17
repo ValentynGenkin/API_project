@@ -1,8 +1,10 @@
+import mongoose from 'mongoose';
 import { APIkeyControl } from '../../util/APIKeyControl.js';
 import { DBModelImport } from '../../util/DBModelImport.js';
 import { verifyToken } from '../../util/verifyToken.js';
+import { checkDataForUpdate } from '../../util/checkDataForUpdate.js';
 
-export const addItem = async (req, res) => {
+export const updateItem = async (req, res) => {
   try {
     const apiKey = req.headers.authorization?.split(' ')[1];
 
@@ -14,7 +16,7 @@ export const addItem = async (req, res) => {
 
     if (Object.keys(data).length === 0) {
       return res.status(400).json({
-        msg: 'Please provide required inputs',
+        msg: 'Please provide at least one item input to update',
       });
     }
 
@@ -33,6 +35,20 @@ export const addItem = async (req, res) => {
     if (!apiKey) {
       return res.status(401).json({
         msg: 'API key is missing',
+      });
+    }
+
+    const { id } = req.query;
+
+    if (!id) {
+      return res.status(400).json({
+        msg: 'Item ID is missing',
+      });
+    }
+
+    if (id && !mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({
+        msg: 'Invalid item ID',
       });
     }
 
@@ -64,21 +80,26 @@ export const addItem = async (req, res) => {
 
       const model = DBModel.default;
 
-      await model.create(data);
+      const schemaFields = await model.schema.obj;
+
+      const dataCheck = checkDataForUpdate(schemaFields, data);
+
+      if (!dataCheck) {
+        return res.status(400).json({
+          msg: 'Check data for update',
+          fieldsForUpdate: Object.keys(schemaFields),
+        });
+      }
+
+      await model.findByIdAndUpdate(id, data);
 
       return res.status(200).json({
-        msg: 'Data successfully created',
+        msg: 'Data successfully updated',
       });
     } else {
       return res.status(403).json({
         msg: 'Invalid API key',
       });
     }
-  } catch (error) {
-    console.error('Error creating data', error);
-    return res.status(500).json({
-      msg: 'Internal Server Error',
-      error: error.message,
-    });
-  }
+  } catch (error) {}
 };
