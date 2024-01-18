@@ -2,47 +2,50 @@ import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
 import * as jose from 'jose';
 
-const userSchema = new mongoose.Schema({
-  firstName: {
-    type: String,
-    required: true,
+const userSchema = new mongoose.Schema(
+  {
+    firstName: {
+      type: String,
+      required: true,
+    },
+    lastName: {
+      type: String,
+      required: true,
+    },
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+    phone: {
+      type: String,
+      required: true,
+    },
+    birthday: {
+      type: Date,
+      required: [true, 'Check date format'],
+    },
+    password: {
+      type: String,
+      minlength: [6, 'Please enter a valid password'],
+      required: [true, 'Please enter a valid password'],
+      select: false,
+    },
+    APIkey: {
+      type: String,
+      required: true,
+    },
+    endpointName: {
+      type: String,
+      require: false,
+    },
+    schemaName: {
+      type: String,
+      require: false,
+    },
   },
-  lastName: {
-    type: String,
-    required: true,
-  },
-  email: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-  phone: {
-    type: String,
-    required: true,
-  },
-  birthday: {
-    type: Date,
-    required: [true, 'Check date format'],
-  },
-  password: {
-    type: String,
-    minlength: [6, 'Please enter a valid password'],
-    required: [true, 'Please enter a valid password'],
-    select: false,
-  },
-  APIkey: {
-    type: String,
-    required: true,
-  },
-  endpointName: {
-    type: String,
-    require: false,
-  },
-  schemaName: {
-    type: String,
-    require: false,
-  },
-});
+  { versionKey: false },
+);
 
 userSchema.methods.createJWTToken = async function () {
   const { ENCRYPTION_KEY, JWT_EXPIRE } = process.env;

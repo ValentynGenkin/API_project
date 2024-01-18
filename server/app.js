@@ -12,10 +12,8 @@ app.use(cookieParser());
 
 app.use('/api/auth', authRouter);
 app.use('/api/schema', schemaRouter);
-
 app.use('/api/custom-rout', usersRouter);
 
-// app.use('/api/collection');
 // app.use('/api/admin');
 
 export default app;
