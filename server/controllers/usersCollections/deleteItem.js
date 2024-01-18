@@ -2,6 +2,7 @@ import mongoose from 'mongoose';
 import { APIkeyControl } from '../../util/APIKeyControl.js';
 import { DBModelImport } from '../../util/DBModelImport.js';
 import { verifyToken } from '../../util/verifyToken.js';
+import { requestValidation } from '../../util/requestValidation.js';
 
 export const deleteItem = async (req, res) => {
   try {
@@ -11,23 +12,9 @@ export const deleteItem = async (req, res) => {
 
     const token = req.cookies.customer_access;
 
-    if (!token) {
-      return res.status(403).json({
-        msg: 'Token not provided',
-      });
-    }
+    const validation = requestValidation(token, apiKey, endpoint, res);
 
-    if (!endpoint) {
-      return res.status(400).json({
-        msg: 'Endpoint is missing',
-      });
-    }
-
-    if (!apiKey) {
-      return res.status(401).json({
-        msg: 'API key is missing',
-      });
-    }
+    if (!validation) return;
 
     const { id } = req.query;
 

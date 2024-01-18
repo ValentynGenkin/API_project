@@ -3,6 +3,7 @@ import { APIkeyControl } from '../../util/APIKeyControl.js';
 import { DBModelImport } from '../../util/DBModelImport.js';
 import { verifyToken } from '../../util/verifyToken.js';
 import { checkDataForUpdate } from '../../util/checkDataForUpdate.js';
+import { requestValidation } from '../../util/requestValidation.js';
 
 export const updateItem = async (req, res) => {
   try {
@@ -20,23 +21,9 @@ export const updateItem = async (req, res) => {
       });
     }
 
-    if (!token) {
-      return res.status(403).json({
-        msg: 'Token not provided',
-      });
-    }
+    const validation = requestValidation(token, apiKey, endpoint, res);
 
-    if (!endpoint) {
-      return res.status(400).json({
-        msg: 'Endpoint is missing',
-      });
-    }
-
-    if (!apiKey) {
-      return res.status(401).json({
-        msg: 'API key is missing',
-      });
-    }
+    if (!validation) return;
 
     const { id } = req.query;
 
@@ -91,7 +78,13 @@ export const updateItem = async (req, res) => {
         });
       }
 
-      await model.findByIdAndUpdate(id, data);
+      const updatedItem = await model.findByIdAndUpdate(id, data);
+
+      if (!updatedItem) {
+        return res.status(404).json({
+          msg: 'Item not found',
+        });
+      }
 
       return res.status(200).json({
         msg: 'Data successfully updated',
