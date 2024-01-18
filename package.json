@@ -6,8 +6,11 @@
   "scripts": {
     "start:server": "cd server && npm start",
     "start:client": "cd client && npm start",
-    "start:both": "npm-run-all -p start:server start:client",
-    "build:client": "cd client && npm run build"
+    "start": "npm-run-all -p start:server start:client",
+    "build:client": "cd client && npm run build",
+    "setup": "npm install && npm-run-all -p setup:client setup:server",
+    "setup:client": "cd client && npm install",
+    "setup:server": "cd server && npm install"
   },
   "author": "",
   "license": "ISC",
