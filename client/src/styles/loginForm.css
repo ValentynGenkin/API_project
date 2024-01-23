@@ -1,0 +1,28 @@
+.login-form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 44px);
+}
+
+.login-form-block {
+  width: 20rem;
+  height: 18rem;
+  background: rgb(229, 229, 229);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  box-shadow: 0 0 8px 3px lightgrey;
+  border: 1px solid rgb(212, 211, 211);
+}
+
+.login-form {
+  width: 90%;
+  height: 90%;
+}
+
+.login-form-registration {
+  margin-bottom: 16px;
+  font-size: 14px;
+}
