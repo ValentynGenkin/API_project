@@ -20,7 +20,7 @@ const LoginForm = () => {
           </Form.Group>
 
           <p className="text-muted login-form-registration">
-            Don't have an account? <Link>Registration</Link>
+            Don't have an account? <Link to={'registration'}>Registration</Link>
           </p>
           <Button as={Link} variant="primary" type="submit">
             Login
