@@ -1,16 +1,13 @@
 import React from 'react';
 import Form from 'react-bootstrap/Form';
-import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/esm/Button';
 import { Link, useNavigate } from 'react-router-dom';
-
-import '../styles/registrationForm.css';
 
 function RegistrationInput() {
   const navigation = useNavigate();
 
   return (
-    <Container className="registration-form-container">
+    <>
       <div className="registration-form-inputs-container">
         <h4 className="registration-form-title">Registration from</h4>
         <div className="registration-form-input">
@@ -54,7 +51,7 @@ function RegistrationInput() {
           </Button>
         </div>
       </div>
-    </Container>
+    </>
   );
 }
 
