@@ -2,7 +2,7 @@ import React from 'react';
 import { Outlet } from 'react-router-dom';
 import Footer from './Footer';
 
-const Layout = () => {
+const LoginLayout = () => {
   return (
     <>
       <Outlet />
@@ -11,4 +11,4 @@ const Layout = () => {
   );
 };
 
-export default Layout;
+export default LoginLayout;
