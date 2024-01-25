@@ -1,0 +1,11 @@
+.user-welcome-page-container {
+  min-height: calc(100vh - 100px);
+}
+
+.user-welcome-cards-block {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding: 30px;
+  gap: 10px;
+}
