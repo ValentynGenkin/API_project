@@ -2,7 +2,9 @@ import React from 'react';
 
 const UserTextBlock = () => {
   return (
-    <div>
+    <div className="user-text-block">
+      <h5>Just 5 steps to get your new API:</h5>
+      <br />
       <h6>1. Choose a Schema Name:</h6>
       <p>
         • Come up with a unique and descriptive name for your data schema. This

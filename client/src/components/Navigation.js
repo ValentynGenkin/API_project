@@ -2,9 +2,9 @@ import React from 'react';
 import Container from 'react-bootstrap/esm/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import { Link } from 'react-router-dom';
 
 import '../styles/navigation.css';
-import { Link } from 'react-router-dom';
 
 const Navigation = () => {
   return (
@@ -15,6 +15,7 @@ const Navigation = () => {
           <Nav.Link as={Link}>Home</Nav.Link>
           <Nav.Link as={Link}>Schema</Nav.Link>
           <Nav.Link as={Link}>Endpoints</Nav.Link>
+          <Nav.Link as={Link}>Statistics</Nav.Link>
           <Nav.Link as={Link}>Account</Nav.Link>
         </Nav>
         <Nav.Link as={Link}>Sign out</Nav.Link>

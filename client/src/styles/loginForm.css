@@ -1,6 +1,7 @@
 .login-form-container {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  /* justify-content: center; */
   align-items: center;
   min-height: calc(100vh - 44px);
 }

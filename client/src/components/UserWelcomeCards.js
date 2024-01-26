@@ -1,5 +1,6 @@
 import React from 'react';
 import Card from 'react-bootstrap/Card';
+import { Link } from 'react-router-dom';
 
 const UserWelcomeCards = () => {
   return (
@@ -9,11 +10,10 @@ const UserWelcomeCards = () => {
           <Card.Title>DB Schema</Card.Title>
 
           <Card.Text>
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
+            Define the structure of your database. Create a schema to store data
+            by selecting necessary fields and their types.
           </Card.Text>
-          <Card.Link href="#">Card Link</Card.Link>
-          <Card.Link href="#">Another Link</Card.Link>
+          <Card.Link as={Link}>DB Schema</Card.Link>
         </Card.Body>
       </Card>
       <Card style={{ width: '15rem' }}>
@@ -21,23 +21,18 @@ const UserWelcomeCards = () => {
           <Card.Title>API Endpoints</Card.Title>
 
           <Card.Text>
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
+            Manage access to your API through entry points, including the
+            integration of API keys.
           </Card.Text>
-          <Card.Link href="#">Card Link</Card.Link>
-          <Card.Link href="#">Another Link</Card.Link>
+          <Card.Link as={Link}>API Endpoints</Card.Link>
         </Card.Body>
       </Card>
       <Card style={{ width: '15rem' }}>
         <Card.Body>
           <Card.Title>API Statistics</Card.Title>
 
-          <Card.Text>
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
-          </Card.Text>
-          <Card.Link href="#">Card Link</Card.Link>
-          <Card.Link href="#">Another Link</Card.Link>
+          <Card.Text>Track the statistics of your API</Card.Text>
+          <Card.Link as={Link}>API Statistics</Card.Link>
         </Card.Body>
       </Card>
     </div>

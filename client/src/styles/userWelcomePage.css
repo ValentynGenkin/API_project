@@ -1,11 +1,18 @@
 .user-welcome-page-container {
   min-height: calc(100vh - 100px);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .user-welcome-cards-block {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
+  flex-direction: column;
   padding: 30px;
   gap: 10px;
+}
+
+.user-text-block {
+  max-width: 50%;
+  margin-top: 50px;
 }
