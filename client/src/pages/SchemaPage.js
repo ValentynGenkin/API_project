@@ -2,6 +2,7 @@ import React from 'react';
 import Container from 'react-bootstrap/esm/Container';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
 
 import '../styles/schemaPage.css';
 
@@ -12,50 +13,57 @@ const SchemaPage = () => {
         <pre>
           {`
           JSON example:
-         name: {
-          type: String,
-          required: true,
-          minlength: [6],
-        },
-        age: {
-          type: Number,
-          required: true,
-          min: 0,
-          max: 99,
-        },
-        address: {
-              city: {
-                type: String,
-                required: false,
-                default: null
+          {
+            "name": {
+              "type": "String",
+              "required": true,
+              "minlength": [6]
+            },
+            "age": {
+              "type": "Number",
+              "required": true,
+              "min": 0,
+              "max": 99
+            },
+            "address": {
+              "city": {
+                "type": "String",
+                "required": false,
+                "default": null
               },
-              country: {
-                type: String,
-                required: false,
-                default: null
+              "country": {
+                "type": "String",
+                "required": false,
+                "default": null
               }
-        },
-        phone: {
-          type: Number,
-          minlength: [6],
-          maxlength: [15],
-          uniq: [true]
-        }
-        hobbies: [String],
-        friends: [{
-          name: String,
-          age: Number,
-        }],
-        createdAt: {
-          type: Date,
-          default: new Date(),
-        },
+            },
+            "phone": {
+              "type": "Number",
+              "minlength": [6],
+              "maxlength": [15],
+              "unique": true
+            },
+            "hobbies": {
+              "type": ["String"]
+            },
+            "friends": [
+              {
+                "name": "String",
+                "age": "Number"
+              }
+            ],
+            "createdAt": {
+              "type": "Date",
+              "default": "new Date()"
+            }
+          }
       `}
         </pre>
 
         <pre>
           {`
   Description:
+
 name:
   type: String - Specifies that the 'name' field should contain strings.
   required: true - Makes the 'name' field mandatory for filling.
@@ -77,6 +85,7 @@ address:
     type: String - Specifies that the 'country' subfield in the 'address' field should contain strings.
     required: false - Indicates that the 'country' subfield is not mandatory for filling.
     default: null - Sets the default value of the 'country' subfield to null.
+
 
 phone:
   type: Number - Specifies that the 'phone' field should contain numbers.
@@ -111,6 +120,8 @@ createdAt:
           style={{ height: '350px', maxWidth: '800px' }}
         />
       </FloatingLabel>
+      <Button variant="warning">JSON Check</Button>
+      <Button variant="secondary">Save Schema</Button>
     </Container>
   );
 };
