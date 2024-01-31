@@ -5,6 +5,7 @@ import MainPage from './pages/MainPage';
 import RegistrationPage from './pages/RegistrationPage';
 import UserLayout from './components/UserLayout';
 import UserWelcomePage from './pages/UserWelcomePage';
+import SchemaPage from './pages/SchemaPage';
 
 function App() {
   return (
@@ -17,7 +18,7 @@ function App() {
 
         <Route path="user-menu" element={<UserLayout />}>
           <Route index element={<UserWelcomePage />} />
-          <Route path="schema" element={<div></div>} />
+          <Route path="schema" element={<SchemaPage />} />
           <Route path="endpoint" element={<div></div>} />
         </Route>
 
