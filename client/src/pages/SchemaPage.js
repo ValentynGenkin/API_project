@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button';
 
 import '../styles/schemaPage.css';
 import SchemaObj from '../components/SchemaComponents/SchemaObj';
+import TypeNumber from '../components/SchemaComponents/TypeNumber';
 
 const SchemaPage = () => {
   return (
@@ -110,6 +111,7 @@ createdAt:
       </div>
 
       <SchemaObj />
+      <TypeNumber />
 
       <Button variant="warning">JSON Check</Button>
       <Button variant="secondary">Save Schema</Button>
