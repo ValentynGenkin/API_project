@@ -23,7 +23,6 @@ export const createNewSchema = async (userId, schemaName, data) => {
     `;
 
     await writeFile(filePath, schemaData, 'utf-8');
-
     return {
       success: true,
       message: 'Schema created successfully',

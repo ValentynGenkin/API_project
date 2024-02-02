@@ -1,10 +1,9 @@
 import React from 'react';
 import Container from 'react-bootstrap/esm/Container';
-import FloatingLabel from 'react-bootstrap/FloatingLabel';
-import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
 import '../styles/schemaPage.css';
+import SchemaObj from '../components/SchemaComponents/SchemaObj';
 
 const SchemaPage = () => {
   return (
@@ -110,16 +109,8 @@ createdAt:
         </pre>
       </div>
 
-      <FloatingLabel
-        controlId="floatingTextarea2"
-        label="Object structure in JSON format"
-      >
-        <Form.Control
-          as="textarea"
-          placeholder="Leave a comment here"
-          style={{ height: '350px', maxWidth: '800px' }}
-        />
-      </FloatingLabel>
+      <SchemaObj />
+
       <Button variant="warning">JSON Check</Button>
       <Button variant="secondary">Save Schema</Button>
     </Container>
