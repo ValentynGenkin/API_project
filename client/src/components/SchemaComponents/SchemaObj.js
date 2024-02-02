@@ -6,9 +6,12 @@ import TypeNumber from './TypeNumber';
 import TypeArray from './TypeArray';
 import TypeObj from './TypeObj';
 import DefaultValue from './DefaultValue';
+import Button from 'react-bootstrap/esm/Button';
 
 const SchemaObj = () => {
   const [objOption, setObjOption] = useState(null);
+  const [defaultValue, setDefaultValue] = useState(null);
+  const [addKey, setAddKey] = useState([<TypeObj />]);
 
   return (
     <div style={{ width: '450px' }}>
@@ -50,7 +53,22 @@ const SchemaObj = () => {
           {objOption === 'String' ? <TypeString /> : null}
           {objOption === 'Number' ? <TypeNumber /> : null}
           {objOption === 'Array' ? <TypeArray /> : null}
-          {objOption === 'Object' ? <TypeObj /> : null}
+          {objOption === 'Object' ? (
+            <>
+              {addKey.map((obj, index) => (
+                <div key={index}>{obj}</div>
+              ))}
+              {addKey.length <= 3 ? (
+                <Button
+                  onClick={() => {
+                    setAddKey([...addKey, <TypeObj />]);
+                  }}
+                >
+                  + Add Key
+                </Button>
+              ) : null}
+            </>
+          ) : null}
         </div>
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <span style={{ whiteSpace: 'nowrap', marginRight: '5px' }}>
@@ -58,8 +76,8 @@ const SchemaObj = () => {
           </span>
           <Form.Select aria-label="Default select example">
             <option>Select</option>
-            <option value="1">True</option>
-            <option value="2">False</option>
+            <option value="True">True</option>
+            <option value="False">False</option>
           </Form.Select>
         </div>
         <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -68,22 +86,27 @@ const SchemaObj = () => {
           </span>
           <Form.Select aria-label="Default select example">
             <option>Select</option>
-            <option value="1">True</option>
-            <option value="2">False</option>
+            <option value="True">True</option>
+            <option value="False">False</option>
           </Form.Select>
         </div>
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <span style={{ whiteSpace: 'nowrap', marginRight: '5px' }}>
             default :{' '}
           </span>
-          <Form.Select aria-label="Default select example">
+          <Form.Select
+            aria-label="Default select example"
+            onChange={(e) => {
+              const option = e.target.value;
+              setDefaultValue(option);
+            }}
+          >
             <option>Select</option>
-            <option value="1">No</option>
-            <option value="2">Yes</option>
+            <option value="No">No</option>
+            <option value="Yes">Yes</option>
           </Form.Select>
 
-          {/* 
-          <DefaultValue /> */}
+          {defaultValue === 'Yes' ? <DefaultValue /> : null}
         </div>
         {`},`}
       </div>

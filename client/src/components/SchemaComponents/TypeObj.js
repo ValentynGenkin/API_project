@@ -66,7 +66,6 @@ const TypeObj = () => {
       <br />
       {`}`}
       <br />
-      <Button>+ Add Key</Button>
     </div>
   );
 };
