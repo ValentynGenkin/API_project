@@ -19,8 +19,21 @@ const SchemaPage = () => {
           setSchemaObj([...schemaObj, <SchemaObj />]);
         }}
       >
-        Add Object
+        Add
       </Button>
+
+      {schemaObj.length > 1 ? (
+        <Button
+          onClick={() => {
+            if (schemaObj.length > 1) {
+              const updatedSchemaObj = schemaObj.slice(0, -1);
+              setSchemaObj(updatedSchemaObj);
+            }
+          }}
+        >
+          Delete
+        </Button>
+      ) : null}
       <Button variant="warning">JSON Check</Button>
       <Button variant="secondary">Save Schema</Button>
     </Container>
