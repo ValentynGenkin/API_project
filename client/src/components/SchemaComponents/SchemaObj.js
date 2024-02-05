@@ -1,21 +1,88 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Form from 'react-bootstrap/Form';
-import DefaultValue from './DefaultValue';
 import RequiredSelect from './RequiredSelect';
 import UniqSelect from './UniqSelect';
 import DefaultSelect from './DefaultSelect';
 import TypeSelect from './TypeSelect';
+import camelCase from 'camelcase';
 
 const SchemaObj = () => {
   const [objOption, setObjOption] = useState(null);
-  const [defaultValue, setDefaultValue] = useState(null);
+
+  const [objName, setObjName] = useState(null);
+
+  const [schemaObj, setSchemaObj] = useState({});
+
+  const [minLength, setMinLength] = useState(null);
+  const [maxLength, setMaxLength] = useState(null);
+
+  const [minNumValue, setMinNumValue] = useState(null);
+  const [maxNumValue, setMaxNumValue] = useState(null);
+  const [minNumLength, setMinNumLength] = useState(null);
+  const [maxNumLength, setMaxNumLength] = useState(null);
+
+  useEffect(() => {
+    const data =
+      objOption !== 'Select'
+        ? `{
+       "type": "${objOption}",
+      "required": true,
+      ${
+        objOption === 'String' && minLength
+          ? `"minlength": [${minLength}],`
+          : ''
+      }
+      ${
+        objOption === 'String' && maxLength
+          ? `"maxlength": [${maxLength}],`
+          : ''
+      }
+      ${
+        objOption === 'Number' && maxNumLength
+          ? `"maxlength": [${maxNumLength}],`
+          : ''
+      }
+      ${
+        objOption === 'Number' && minNumLength
+          ? `"minlength": [${minNumLength}],`
+          : ''
+      }
+      ${objOption === 'Number' && minNumValue ? `"min": [${minNumValue}],` : ''}
+      ${objOption === 'Number' && maxNumValue ? `"max": [${maxNumValue}],` : ''}
+}`
+        : null;
+
+    handelSchemaData(data);
+    console.log(schemaObj);
+  }, [
+    maxLength,
+    maxNumLength,
+    maxNumValue,
+    minLength,
+    minNumLength,
+    minNumValue,
+    objOption,
+    objName,
+    schemaObj,
+  ]);
+
+  const handelSchemaData = (data) => {
+    setSchemaObj(`${objName} ${data}`);
+  };
 
   return (
     <div style={{ width: '450px' }}>
       {`{`}
       <div style={{ display: 'flex', flexDirection: 'column' }}>
-        <InputGroup size="sm" className="mb-3">
+        <InputGroup
+          size="sm"
+          className="mb-3"
+          onChange={(e) => {
+            const name = e.target.value;
+            setObjName(`'${camelCase(name)}':`);
+          }}
+        >
           <InputGroup.Text id="inputGroup-sizing-sm">
             Object name
           </InputGroup.Text>
@@ -26,7 +93,16 @@ const SchemaObj = () => {
         </InputGroup>
         {`:`}
 
-        <TypeSelect objOption={objOption} setObjOption={setObjOption} />
+        <TypeSelect
+          objOption={objOption}
+          setObjOption={setObjOption}
+          setMaxLength={setMaxLength}
+          setMinLength={setMinLength}
+          setMaxNumLength={setMaxNumLength}
+          setMinNumLength={setMinNumLength}
+          setMaxNumValue={setMaxNumValue}
+          setMinNumValue={setMinNumValue}
+        />
 
         {objOption === 'Object' ||
         objOption === 'Array' ||
@@ -34,8 +110,7 @@ const SchemaObj = () => {
           <>
             <RequiredSelect />
             <UniqSelect />
-            <DefaultSelect props={setDefaultValue} />
-            {defaultValue === 'Yes' ? <DefaultValue /> : null}
+            <DefaultSelect />
           </>
         )}
         {`},`}

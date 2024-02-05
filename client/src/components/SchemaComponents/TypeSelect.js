@@ -7,7 +7,16 @@ import TypeObj from './TypeObj';
 import Button from 'react-bootstrap/esm/Button';
 
 const TypeSelect = ({ ...props }) => {
-  const { objOption, setObjOption } = props;
+  const {
+    objOption,
+    setObjOption,
+    setMinLength,
+    setMaxLength,
+    setMinNumValue,
+    setMaxNumValue,
+    setMinNumLength,
+    setMaxNumLength,
+  } = props;
 
   const [addKey, setAddKey] = useState([<TypeObj />]);
 
@@ -34,8 +43,17 @@ const TypeSelect = ({ ...props }) => {
           <option value="Object">Object</option>
         </Form.Select>
 
-        {objOption === 'String' ? <TypeString /> : null}
-        {objOption === 'Number' ? <TypeNumber /> : null}
+        {objOption === 'String' ? (
+          <TypeString setMaxLength={setMaxLength} setMinLength={setMinLength} />
+        ) : null}
+        {objOption === 'Number' ? (
+          <TypeNumber
+            setMaxNumLength={setMaxNumLength}
+            setMinNumLength={setMinNumLength}
+            setMaxNumValue={setMaxNumValue}
+            setMinNumValue={setMinNumValue}
+          />
+        ) : null}
         {objOption === 'Array' ? <TypeArray /> : null}
         {objOption === 'Object' ? (
           <>

@@ -1,11 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Form from 'react-bootstrap/Form';
-import DefaultValue from './DefaultValue';
 import DefaultSelect from './DefaultSelect';
 
 const TypeObj = () => {
-  const [defaultValue, setDefaultValue] = useState(null);
   return (
     <div style={{ width: '450px' }}>
       {`{`}
@@ -53,8 +51,8 @@ const TypeObj = () => {
             <option value="2">False</option>
           </Form.Select>
         </div>
-        <DefaultSelect props={setDefaultValue} />
-        {defaultValue === 'Yes' ? <DefaultValue /> : null}
+        <DefaultSelect />
+
         {`},`}
       </div>
       <br />

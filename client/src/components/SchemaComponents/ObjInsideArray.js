@@ -1,11 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Form from 'react-bootstrap/Form';
 import DefaultSelect from './DefaultSelect';
-import DefaultValue from './DefaultValue';
 
 const ObjInsideArray = () => {
-  const [defaultValue, setDefaultValue] = useState(null);
   return (
     <div style={{ width: '450px' }}>
       {`{`}
@@ -42,8 +40,7 @@ const ObjInsideArray = () => {
           </Form.Select>
         </div>
 
-        <DefaultSelect props={setDefaultValue} />
-        {defaultValue === 'Yes' ? <DefaultValue /> : null}
+        <DefaultSelect />
 
         {`},`}
       </div>
