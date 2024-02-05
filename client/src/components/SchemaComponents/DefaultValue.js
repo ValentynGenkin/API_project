@@ -2,10 +2,21 @@ import React from 'react';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Form from 'react-bootstrap/Form';
 
-const DefaultValue = () => {
+const DefaultValue = ({ defaultOption, setDefaultValue }) => {
   return (
     <div style={{ width: '250px' }}>
-      <InputGroup size="sm" className="mb-3">
+      <InputGroup
+        size="sm"
+        className="mb-3"
+        onChange={(e) => {
+          console.log(e.target.value);
+          if (defaultOption === 'Yes') {
+            setDefaultValue(e.target.value);
+          } else {
+            setDefaultValue(null);
+          }
+        }}
+      >
         <InputGroup.Text id="inputGroup-sizing-sm">
           Default value
         </InputGroup.Text>

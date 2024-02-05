@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import DefaultValue from './DefaultValue';
 
-const DefaultSelect = () => {
-  const [defaultValue, setDefaultValue] = useState(null);
+const DefaultSelect = ({ setDefaultValue }) => {
+  const [defaultOption, setDefaultOption] = useState(null);
+
   return (
     <div
       style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
@@ -15,7 +16,7 @@ const DefaultSelect = () => {
         aria-label="Default select example"
         onChange={(e) => {
           const option = e.target.value;
-          setDefaultValue(option);
+          setDefaultOption(option);
         }}
       >
         <option>Select</option>
@@ -23,7 +24,12 @@ const DefaultSelect = () => {
         <option value="Yes">Yes</option>
       </Form.Select>
 
-      {defaultValue === 'Yes' ? <DefaultValue /> : null}
+      {defaultOption === 'Yes' ? (
+        <DefaultValue
+          defaultOption={defaultOption}
+          setDefaultValue={setDefaultValue}
+        />
+      ) : null}
     </div>
   );
 };

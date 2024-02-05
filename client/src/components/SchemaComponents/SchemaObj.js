@@ -26,6 +26,8 @@ const SchemaObj = () => {
 
   const [uniq, setUniq] = useState(null);
 
+  const [defaultValue, setDefaultValue] = useState(null);
+
   useEffect(() => {
     const data =
       objOption !== 'Select'
@@ -55,7 +57,8 @@ const SchemaObj = () => {
       }
       ${objOption === 'Number' && minNumValue ? `"min": [${minNumValue}],` : ''}
       ${objOption === 'Number' && maxNumValue ? `"max": [${maxNumValue}],` : ''}
-}`
+      ${defaultValue ? `"default" : "${defaultValue}",` : ''}
+},`
         : null;
 
     setSchemaObj(`${objName} ${data}`);
@@ -72,6 +75,7 @@ const SchemaObj = () => {
     schemaObj,
     required,
     uniq,
+    defaultValue,
   ]);
 
   return (
@@ -113,7 +117,7 @@ const SchemaObj = () => {
           <>
             <RequiredSelect props={setRequired} />
             <UniqSelect props={setUniq} />
-            <DefaultSelect />
+            <DefaultSelect setDefaultValue={setDefaultValue} />
           </>
         )}
         {`},`}
