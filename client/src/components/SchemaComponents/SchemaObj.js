@@ -22,12 +22,17 @@ const SchemaObj = () => {
   const [minNumLength, setMinNumLength] = useState(null);
   const [maxNumLength, setMaxNumLength] = useState(null);
 
+  const [required, setRequired] = useState(null);
+
+  const [uniq, setUniq] = useState(null);
+
   useEffect(() => {
     const data =
       objOption !== 'Select'
         ? `{
        "type": "${objOption}",
-      "required": true,
+      ${required === 'True' ? '"required": true,' : ''}
+      ${uniq === 'True' ? '"uniq": true,' : ''}
       ${
         objOption === 'String' && minLength
           ? `"minlength": [${minLength}],`
@@ -53,7 +58,7 @@ const SchemaObj = () => {
 }`
         : null;
 
-    handelSchemaData(data);
+    setSchemaObj(`${objName} ${data}`);
     console.log(schemaObj);
   }, [
     maxLength,
@@ -65,11 +70,9 @@ const SchemaObj = () => {
     objOption,
     objName,
     schemaObj,
+    required,
+    uniq,
   ]);
-
-  const handelSchemaData = (data) => {
-    setSchemaObj(`${objName} ${data}`);
-  };
 
   return (
     <div style={{ width: '450px' }}>
@@ -80,7 +83,7 @@ const SchemaObj = () => {
           className="mb-3"
           onChange={(e) => {
             const name = e.target.value;
-            setObjName(`'${camelCase(name)}':`);
+            setObjName(`"${camelCase(name)}":`);
           }}
         >
           <InputGroup.Text id="inputGroup-sizing-sm">
@@ -108,8 +111,8 @@ const SchemaObj = () => {
         objOption === 'Array' ||
         objOption === 'Select' ? null : (
           <>
-            <RequiredSelect />
-            <UniqSelect />
+            <RequiredSelect props={setRequired} />
+            <UniqSelect props={setUniq} />
             <DefaultSelect />
           </>
         )}
