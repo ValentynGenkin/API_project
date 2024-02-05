@@ -28,7 +28,9 @@ const SchemaObj = () => {
 
         <TypeSelect objOption={objOption} setObjOption={setObjOption} />
 
-        {objOption === 'Object' ? null : (
+        {objOption === 'Object' ||
+        objOption === 'Array' ||
+        objOption === 'Select' ? null : (
           <>
             <RequiredSelect />
             <UniqSelect />

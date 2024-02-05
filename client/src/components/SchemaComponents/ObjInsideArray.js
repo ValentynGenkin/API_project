@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Form from 'react-bootstrap/Form';
-import DefaultValue from './DefaultValue';
 import DefaultSelect from './DefaultSelect';
+import DefaultValue from './DefaultValue';
 
-const TypeObj = () => {
+const ObjInsideArray = () => {
   const [defaultValue, setDefaultValue] = useState(null);
   return (
     <div style={{ width: '450px' }}>
@@ -29,8 +29,6 @@ const TypeObj = () => {
             <option>Select</option>
             <option value="1">String</option>
             <option value="2">Number</option>
-            <option value="3">Boolean</option>
-            <option value="4">Date</option>
           </Form.Select>
         </div>
         <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -43,18 +41,10 @@ const TypeObj = () => {
             <option value="2">False</option>
           </Form.Select>
         </div>
-        <div style={{ display: 'flex', alignItems: 'center' }}>
-          <span style={{ whiteSpace: 'nowrap', marginRight: '5px' }}>
-            uniq :{' '}
-          </span>
-          <Form.Select aria-label="Default select example">
-            <option>Select</option>
-            <option value="1">True</option>
-            <option value="2">False</option>
-          </Form.Select>
-        </div>
+
         <DefaultSelect props={setDefaultValue} />
         {defaultValue === 'Yes' ? <DefaultValue /> : null}
+
         {`},`}
       </div>
       <br />
@@ -64,4 +54,4 @@ const TypeObj = () => {
   );
 };
 
-export default TypeObj;
+export default ObjInsideArray;
