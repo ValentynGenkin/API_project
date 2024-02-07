@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import TypeString from './TypeString';
 import TypeNumber from './TypeNumber';
@@ -18,7 +18,20 @@ const TypeSelect = ({ ...props }) => {
     setMaxNumLength,
   } = props;
 
-  const [addKey, setAddKey] = useState([<TypeObj />]);
+  const [object, setObject] = useState(null);
+  const [test, setTest] = useState([]);
+
+  const [addKey, setAddKey] = useState([<TypeObj setObject={setObject} />]);
+
+  const objKeySaving = (index) => {
+    let data = [...test];
+    data[index] = object;
+    setTest(data);
+  };
+
+  useEffect(() => {
+    objKeySaving(addKey.length - 1);
+  }, [object]);
 
   return (
     <div>
@@ -60,10 +73,10 @@ const TypeSelect = ({ ...props }) => {
             {addKey.map((obj, index) => (
               <div key={index}>{obj}</div>
             ))}
-            {addKey.length <= 3 ? (
+            {addKey.length <= 2 ? (
               <Button
                 onClick={() => {
-                  setAddKey([...addKey, <TypeObj />]);
+                  setAddKey([...addKey, <TypeObj setObject={setObject} />]);
                 }}
               >
                 + Add Key

@@ -62,7 +62,6 @@ const SchemaObj = () => {
         : null;
 
     setSchemaObj(`${objName} ${data}`);
-    console.log(schemaObj);
   }, [
     maxLength,
     maxNumLength,
@@ -116,7 +115,9 @@ const SchemaObj = () => {
         objOption === 'Select' ? null : (
           <>
             <RequiredSelect props={setRequired} />
-            <UniqSelect props={setUniq} />
+            {objOption === 'Boolean' || objOption === 'Date' ? null : (
+              <UniqSelect props={setUniq} />
+            )}
             <DefaultSelect setDefaultValue={setDefaultValue} />
           </>
         )}
