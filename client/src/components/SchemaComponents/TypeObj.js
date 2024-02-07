@@ -11,13 +11,13 @@ const TypeObj = ({ setObject }) => {
   const [uniq, setUniq] = useState(null);
 
   useEffect(() => {
-    const data = `{
+    const data = `
       "${keyName}" : {
         "type" : "${type}",
         "required" : "${required}",
         "uniq" : "${uniq}",
       },
-    },`;
+    `;
 
     setObject(data);
   }, [keyName, required, type, uniq]);

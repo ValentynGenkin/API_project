@@ -28,10 +28,12 @@ const SchemaObj = () => {
 
   const [defaultValue, setDefaultValue] = useState(null);
 
+  const [objectsArray, setObjectsArray] = useState([]);
+
   useEffect(() => {
-    const data =
-      objOption !== 'Select'
-        ? `{
+    let data;
+    if (objOption === 'Number' || objOption === 'String') {
+      data = `{
        "type": "${objOption}",
       ${required === 'True' ? '"required": true,' : ''}
       ${uniq === 'True' ? '"uniq": true,' : ''}
@@ -58,10 +60,15 @@ const SchemaObj = () => {
       ${objOption === 'Number' && minNumValue ? `"min": [${minNumValue}],` : ''}
       ${objOption === 'Number' && maxNumValue ? `"max": [${maxNumValue}],` : ''}
       ${defaultValue ? `"default" : "${defaultValue}",` : ''}
-},`
-        : null;
+},`;
+    }
+
+    if (objOption === 'Object') {
+      data = `{${objectsArray.join(' ')}},`;
+    }
 
     setSchemaObj(`${objName} ${data}`);
+    console.log(schemaObj);
   }, [
     maxLength,
     maxNumLength,
@@ -75,6 +82,7 @@ const SchemaObj = () => {
     required,
     uniq,
     defaultValue,
+    objectsArray,
   ]);
 
   return (
@@ -108,6 +116,8 @@ const SchemaObj = () => {
           setMinNumLength={setMinNumLength}
           setMaxNumValue={setMaxNumValue}
           setMinNumValue={setMinNumValue}
+          objectsArray={objectsArray}
+          setObjectsArray={setObjectsArray}
         />
 
         {objOption === 'Object' ||

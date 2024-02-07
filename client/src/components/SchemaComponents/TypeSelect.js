@@ -16,21 +16,25 @@ const TypeSelect = ({ ...props }) => {
     setMaxNumValue,
     setMinNumLength,
     setMaxNumLength,
+    objectsArray,
+    setObjectsArray,
   } = props;
 
   const [object, setObject] = useState(null);
-  const [test, setTest] = useState([]);
+  // const [objectsArray, setObjectsArray] = useState([]);
 
   const [addKey, setAddKey] = useState([<TypeObj setObject={setObject} />]);
 
   const objKeySaving = (index) => {
-    let data = [...test];
+    let data = [...objectsArray];
     data[index] = object;
-    setTest(data);
+    setObjectsArray(data);
   };
 
   useEffect(() => {
-    objKeySaving(addKey.length - 1);
+    if (object) {
+      objKeySaving(addKey.length - 1);
+    }
   }, [object]);
 
   return (
