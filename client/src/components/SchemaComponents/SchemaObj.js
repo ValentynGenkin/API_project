@@ -28,10 +28,12 @@ const SchemaObj = () => {
 
   const [defaultValue, setDefaultValue] = useState(null);
 
+  const [defaultOption, setDefaultOption] = useState(null);
+
   const [objectsArray, setObjectsArray] = useState([]);
 
   useEffect(() => {
-    let data;
+    let data = '';
     if (objOption === 'Number' || objOption === 'String') {
       data = `{
        "type": "${objOption}",
@@ -59,7 +61,7 @@ const SchemaObj = () => {
       }
       ${objOption === 'Number' && minNumValue ? `"min": [${minNumValue}],` : ''}
       ${objOption === 'Number' && maxNumValue ? `"max": [${maxNumValue}],` : ''}
-      ${defaultValue ? `"default" : "${defaultValue}",` : ''}
+      ${defaultOption === 'Yes' ? `"default" : "${defaultValue}",` : ''}
 },`;
     }
 
@@ -67,8 +69,10 @@ const SchemaObj = () => {
       data = `{${objectsArray.join(' ')}},`;
     }
 
+    if(objOption === "Array") {
+      data = `{ },`
+    }
     setSchemaObj(`${objName} ${data}`);
-    console.log(schemaObj);
   }, [
     maxLength,
     maxNumLength,
@@ -78,11 +82,11 @@ const SchemaObj = () => {
     minNumValue,
     objOption,
     objName,
-    schemaObj,
     required,
     uniq,
     defaultValue,
     objectsArray,
+    defaultOption,
   ]);
 
   return (
@@ -128,7 +132,11 @@ const SchemaObj = () => {
             {objOption === 'Boolean' || objOption === 'Date' ? null : (
               <UniqSelect props={setUniq} />
             )}
-            <DefaultSelect setDefaultValue={setDefaultValue} />
+            <DefaultSelect
+              setDefaultValue={setDefaultValue}
+              defaultOption={defaultOption}
+              setDefaultOption={setDefaultOption}
+            />
           </>
         )}
         {`},`}

@@ -21,7 +21,6 @@ const TypeSelect = ({ ...props }) => {
   } = props;
 
   const [object, setObject] = useState(null);
-  // const [objectsArray, setObjectsArray] = useState([]);
 
   const [addKey, setAddKey] = useState([<TypeObj setObject={setObject} />]);
 

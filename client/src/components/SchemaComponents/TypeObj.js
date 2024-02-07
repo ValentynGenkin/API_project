@@ -11,15 +11,17 @@ const TypeObj = ({ setObject }) => {
   const [uniq, setUniq] = useState(null);
 
   useEffect(() => {
-    const data = `
+    if (type) {
+      const data = `
       "${keyName}" : {
-        "type" : "${type}",
-        "required" : "${required}",
-        "uniq" : "${uniq}",
+        ${type ? `"type" : "${type}",` : ''}
+        ${required === 'True' ? `"required" : "${required}",` : ''}
+        ${uniq === 'True' ? `"uniq" : "${uniq}",` : ''}
       },
     `;
 
-    setObject(data);
+      setObject(data);
+    }
   }, [keyName, required, type, uniq]);
 
   return (

@@ -1,11 +1,29 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import ObjInsideArray from './ObjInsideArray';
 import Button from 'react-bootstrap/esm/Button';
 
 const TypeArray = () => {
   const [objOption, setObjOption] = useState(null);
-  const [addKey, setAddKey] = useState([<ObjInsideArray />]);
+  const [arrayObject, setArrayObject] = useState(null);
+
+  const [arrayObjects, setArrayObjects] = useState([]);
+
+  const [addKey, setAddKey] = useState([
+    <ObjInsideArray setArrayObject={setArrayObject} />,
+  ]);
+
+  const arrayObjSaving = (index) => {
+    let data = [...arrayObjects];
+    data[index] = arrayObject;
+    setArrayObjects(data);
+  };
+
+  useEffect(() => {
+    if (arrayObject) {
+      arrayObjSaving(addKey.length - 1);
+    }
+  }, [arrayObject]);
 
   return (
     <div
@@ -35,10 +53,13 @@ const TypeArray = () => {
           {addKey.map((obj, index) => (
             <div key={index}>{obj}</div>
           ))}
-          {addKey.length <= 3 ? (
+          {addKey.length <= 2 ? (
             <Button
               onClick={() => {
-                setAddKey([...addKey, <ObjInsideArray />]);
+                setAddKey([
+                  ...addKey,
+                  <ObjInsideArray setArrayObject={setArrayObject} />,
+                ]);
               }}
             >
               + Add Key

@@ -1,14 +1,37 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Form from 'react-bootstrap/Form';
-import DefaultSelect from './DefaultSelect';
+import camelCase from 'camelcase';
 
-const ObjInsideArray = () => {
+const ObjInsideArray = ({ setArrayObject }) => {
+  const [keyName, setKeyName] = useState(null);
+
+  const [type, setType] = useState(null);
+
+  useEffect(() => {
+    if (type) {
+      const data = `
+      "${keyName}" : {
+        ${type ? `"type" : "${type}",` : ''}
+      },
+    `;
+
+      setArrayObject(data);
+    }
+  }, [keyName, type]);
+
   return (
     <div style={{ width: '450px' }}>
       {`{`}
       <div style={{ display: 'flex' }}>
-        <InputGroup size="sm" className="mb-3">
+        <InputGroup
+          size="sm"
+          className="mb-3"
+          onChange={(e) => {
+            const name = camelCase(e.target.value);
+            setKeyName(name);
+          }}
+        >
           <InputGroup.Text id="inputGroup-sizing-sm">Key name</InputGroup.Text>
           <Form.Control
             aria-label="Small"
@@ -23,24 +46,20 @@ const ObjInsideArray = () => {
           <span style={{ whiteSpace: 'nowrap', marginRight: '5px' }}>
             type :{' '}
           </span>
-          <Form.Select aria-label="Default select example">
+          <Form.Select
+            aria-label="Default select example"
+            onChange={(e) => {
+              const type = e.target.value;
+              if (type !== 'Select') {
+                setType(type);
+              }
+            }}
+          >
             <option>Select</option>
-            <option value="1">String</option>
-            <option value="2">Number</option>
+            <option value="String">String</option>
+            <option value="Number">Number</option>
           </Form.Select>
         </div>
-        <div style={{ display: 'flex', alignItems: 'center' }}>
-          <span style={{ whiteSpace: 'nowrap', marginRight: '5px' }}>
-            required :{' '}
-          </span>
-          <Form.Select aria-label="Default select example">
-            <option>Select</option>
-            <option value="1">True</option>
-            <option value="2">False</option>
-          </Form.Select>
-        </div>
-
-        <DefaultSelect />
 
         {`},`}
       </div>

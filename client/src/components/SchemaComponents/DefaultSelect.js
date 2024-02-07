@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Form from 'react-bootstrap/Form';
 import DefaultValue from './DefaultValue';
 
-const DefaultSelect = ({ setDefaultValue }) => {
-  const [defaultOption, setDefaultOption] = useState(null);
-
+const DefaultSelect = ({
+  setDefaultValue,
+  defaultOption,
+  setDefaultOption,
+}) => {
   return (
     <div
       style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
