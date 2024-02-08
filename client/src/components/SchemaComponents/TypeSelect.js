@@ -18,6 +18,8 @@ const TypeSelect = ({ ...props }) => {
     setMaxNumLength,
     objectsArray,
     setObjectsArray,
+    arrayObjects,
+    setArrayObjects,
   } = props;
 
   const [object, setObject] = useState(null);
@@ -48,6 +50,11 @@ const TypeSelect = ({ ...props }) => {
           onChange={(e) => {
             const type = e.target.value;
             setObjOption(type);
+
+            if (type === 'Object') {
+              setAddKey([<TypeObj setObject={setObject} />]);
+              setObjectsArray([]);
+            }
           }}
         >
           <option>Select</option>
@@ -70,7 +77,12 @@ const TypeSelect = ({ ...props }) => {
             setMinNumValue={setMinNumValue}
           />
         ) : null}
-        {objOption === 'Array' ? <TypeArray /> : null}
+        {objOption === 'Array' ? (
+          <TypeArray
+            arrayObjects={arrayObjects}
+            setArrayObjects={setArrayObjects}
+          />
+        ) : null}
         {objOption === 'Object' ? (
           <>
             {addKey.map((obj, index) => (

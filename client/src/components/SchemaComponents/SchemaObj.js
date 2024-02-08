@@ -6,6 +6,7 @@ import UniqSelect from './UniqSelect';
 import DefaultSelect from './DefaultSelect';
 import TypeSelect from './TypeSelect';
 import camelCase from 'camelcase';
+import Button from 'react-bootstrap/esm/Button';
 
 const SchemaObj = () => {
   const [objOption, setObjOption] = useState(null);
@@ -31,6 +32,8 @@ const SchemaObj = () => {
   const [defaultOption, setDefaultOption] = useState(null);
 
   const [objectsArray, setObjectsArray] = useState([]);
+
+  const [arrayObjects, setArrayObjects] = useState([]);
 
   useEffect(() => {
     let data = '';
@@ -69,8 +72,12 @@ const SchemaObj = () => {
       data = `{${objectsArray.join(' ')}},`;
     }
 
-    if(objOption === "Array") {
-      data = `{ },`
+    if (objOption === 'Array') {
+      data = `[${
+        typeof arrayObjects === 'string'
+          ? arrayObjects
+          : `{${arrayObjects.join(' ')}},`
+      }],`;
     }
     setSchemaObj(`${objName} ${data}`);
   }, [
@@ -87,6 +94,7 @@ const SchemaObj = () => {
     defaultValue,
     objectsArray,
     defaultOption,
+    arrayObjects,
   ]);
 
   return (
@@ -122,6 +130,8 @@ const SchemaObj = () => {
           setMinNumValue={setMinNumValue}
           objectsArray={objectsArray}
           setObjectsArray={setObjectsArray}
+          arrayObjects={arrayObjects}
+          setArrayObjects={setArrayObjects}
         />
 
         {objOption === 'Object' ||
@@ -144,6 +154,13 @@ const SchemaObj = () => {
       <br />
       {`},`}
       <br />
+      <Button
+        onClick={() => {
+          console.log(schemaObj);
+        }}
+      >
+        aaa
+      </Button>
     </div>
   );
 };

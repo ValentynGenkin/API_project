@@ -3,11 +3,9 @@ import Form from 'react-bootstrap/Form';
 import ObjInsideArray from './ObjInsideArray';
 import Button from 'react-bootstrap/esm/Button';
 
-const TypeArray = () => {
+const TypeArray = ({ arrayObjects, setArrayObjects }) => {
   const [objOption, setObjOption] = useState(null);
   const [arrayObject, setArrayObject] = useState(null);
-
-  const [arrayObjects, setArrayObjects] = useState([]);
 
   const [addKey, setAddKey] = useState([
     <ObjInsideArray setArrayObject={setArrayObject} />,
@@ -20,10 +18,13 @@ const TypeArray = () => {
   };
 
   useEffect(() => {
-    if (arrayObject) {
+    if (arrayObject && objOption === 'Object') {
       arrayObjSaving(addKey.length - 1);
     }
-  }, [arrayObject]);
+    if (objOption === 'Number' || objOption === 'String') {
+      setArrayObjects(`"${objOption}"`);
+    }
+  }, [arrayObject, objOption]);
 
   return (
     <div
@@ -40,6 +41,11 @@ const TypeArray = () => {
         aria-label="Default select example"
         onChange={(e) => {
           setObjOption(e.target.value);
+
+          if (e.target.value === 'Object') {
+            setAddKey([<ObjInsideArray setArrayObject={setArrayObject} />]);
+            setArrayObjects([]);
+          }
         }}
       >
         <option>Select</option>

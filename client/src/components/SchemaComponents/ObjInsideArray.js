@@ -10,11 +10,7 @@ const ObjInsideArray = ({ setArrayObject }) => {
 
   useEffect(() => {
     if (type) {
-      const data = `
-      "${keyName}" : {
-        ${type ? `"type" : "${type}",` : ''}
-      },
-    `;
+      const data = `"${keyName}" : "${type}",`;
 
       setArrayObject(data);
     }
