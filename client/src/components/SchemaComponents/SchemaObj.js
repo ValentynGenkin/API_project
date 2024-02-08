@@ -68,6 +68,24 @@ const SchemaObj = () => {
 },`;
     }
 
+    if (objOption === 'Boolean') {
+      data = `
+      {
+        "type": "${objOption}",
+        ${required === 'True' ? '"required": true,' : ''}
+        ${defaultOption === 'Yes' ? `"default" : "${defaultValue}",` : ''}
+      },
+      `;
+    }
+
+    if (objOption === 'Date') {
+      data = ` {
+        "type": "${objOption}",
+        ${required === 'True' ? '"required": true,' : ''}
+        ${defaultOption === 'Yes' ? `"default" : "${defaultValue}",` : ''}
+      },`;
+    }
+
     if (objOption === 'Object') {
       data = `{${objectsArray.join(' ')}},`;
     }
@@ -80,6 +98,7 @@ const SchemaObj = () => {
       }],`;
     }
     setSchemaObj(`${objName} ${data}`);
+    // console.log(schemaObj);
   }, [
     maxLength,
     maxNumLength,
@@ -154,13 +173,6 @@ const SchemaObj = () => {
       <br />
       {`},`}
       <br />
-      <Button
-        onClick={() => {
-          console.log(schemaObj);
-        }}
-      >
-        aaa
-      </Button>
     </div>
   );
 };
