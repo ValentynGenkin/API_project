@@ -5,7 +5,7 @@ import TypeNumber from './TypeNumber';
 import TypeArray from './TypeArray';
 import TypeObj from './TypeObj';
 import Button from 'react-bootstrap/esm/Button';
-import { removeLastComma } from '../../util/removeLastComma';
+import { handleObject } from '../../util/handleObject';
 
 const TypeSelect = ({ ...props }) => {
   const {
@@ -25,17 +25,13 @@ const TypeSelect = ({ ...props }) => {
 
   const [object, setObject] = useState(null);
 
-  const [addKey, setAddKey] = useState([<TypeObj setObject={setObject} />]);
+  const [objIndex, setObjIndex] = useState(0);
 
-  const objKeySaving = (index) => {
-    let data = [...objectsArray];
-    data[index] = object;
-    setObjectsArray(data);
-  };
+  const [addKey, setAddKey] = useState([<TypeObj setObject={setObject} />]);
 
   useEffect(() => {
     if (object) {
-      objKeySaving(addKey.length - 1);
+      handleObject(objIndex, objectsArray, object, setObjectsArray);
     }
   }, [object]);
 
@@ -87,7 +83,14 @@ const TypeSelect = ({ ...props }) => {
         {objOption === 'Object' ? (
           <>
             {addKey.map((obj, index) => (
-              <div key={index}>{obj}</div>
+              <div
+                key={index}
+                onChange={() => {
+                  setObjIndex(index);
+                }}
+              >
+                {obj}
+              </div>
             ))}
             {addKey.length <= 2 ? (
               <Button

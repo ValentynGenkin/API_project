@@ -2,24 +2,20 @@ import React, { useEffect, useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import ObjInsideArray from './ObjInsideArray';
 import Button from 'react-bootstrap/esm/Button';
+import { handleObject } from '../../util/handleObject';
 
 const TypeArray = ({ arrayObjects, setArrayObjects }) => {
   const [objOption, setObjOption] = useState(null);
   const [arrayObject, setArrayObject] = useState(null);
+  const [objIndex, setObjIndex] = useState(0);
 
   const [addKey, setAddKey] = useState([
     <ObjInsideArray setArrayObject={setArrayObject} />,
   ]);
 
-  const arrayObjSaving = (index) => {
-    let data = [...arrayObjects];
-    data[index] = arrayObject;
-    setArrayObjects(data);
-  };
-
   useEffect(() => {
     if (arrayObject && objOption === 'Object') {
-      arrayObjSaving(addKey.length - 1);
+      handleObject(objIndex, arrayObjects, arrayObject, setArrayObjects);
     }
     if (objOption === 'Number' || objOption === 'String') {
       setArrayObjects(`"${objOption}"`);
@@ -57,7 +53,14 @@ const TypeArray = ({ arrayObjects, setArrayObjects }) => {
       {objOption === 'Object' ? (
         <>
           {addKey.map((obj, index) => (
-            <div key={index}>{obj}</div>
+            <div
+              key={index}
+              onChange={() => {
+                setObjIndex(index);
+              }}
+            >
+              {obj}
+            </div>
           ))}
           {addKey.length <= 2 ? (
             <Button

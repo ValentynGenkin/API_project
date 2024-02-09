@@ -6,25 +6,21 @@ import Example from '../components/SchemaComponents/Example';
 
 import '../styles/schemaPage.css';
 import { removeLastComma } from '../util/removeLastComma';
+import { handleObject } from '../util/handleObject';
 
 const SchemaPage = () => {
   const [schemaForSave, setSchemaForSave] = useState([]);
 
   const [schemaObj, setSchemaObj] = useState(null);
+  const [objIndex, setObjIndex] = useState(0);
 
   const [schemaComponent, setSchemaComponent] = useState([
     <SchemaObj schemaObj={schemaObj} setSchemaObj={setSchemaObj} />,
   ]);
 
-  const arrayObjSaving = (index) => {
-    let data = [...schemaForSave];
-    data[index] = schemaObj;
-    setSchemaForSave(data);
-  };
-
   useEffect(() => {
     if (schemaObj) {
-      arrayObjSaving(schemaComponent.length - 1);
+      handleObject(objIndex, schemaForSave, schemaObj, setSchemaForSave);
     }
   }, [schemaObj]);
 
@@ -32,7 +28,14 @@ const SchemaPage = () => {
     <Container className="schema-page-container">
       <Example />
       {schemaComponent.map((obj, index) => (
-        <div key={index}>{obj}</div>
+        <div
+          key={index}
+          onChange={() => {
+            setObjIndex(index);
+          }}
+        >
+          {obj}
+        </div>
       ))}
       <Button
         onClick={() => {
@@ -64,8 +67,6 @@ const SchemaPage = () => {
           const aa = JSON.parse(
             `{${removeLastComma(schemaForSave.join(''))}} `,
           );
-
-          console.log(JSON.stringify(aa));
         }}
       >
         Save Schema
