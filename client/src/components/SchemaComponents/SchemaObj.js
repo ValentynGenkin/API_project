@@ -6,14 +6,12 @@ import UniqSelect from './UniqSelect';
 import DefaultSelect from './DefaultSelect';
 import TypeSelect from './TypeSelect';
 import camelCase from 'camelcase';
-import Button from 'react-bootstrap/esm/Button';
+import { removeLastComma } from '../../util/removeLastComma';
 
-const SchemaObj = () => {
+const SchemaObj = ({ schemaObj, setSchemaObj }) => {
   const [objOption, setObjOption] = useState(null);
 
   const [objName, setObjName] = useState(null);
-
-  const [schemaObj, setSchemaObj] = useState({});
 
   const [minLength, setMinLength] = useState(null);
   const [maxLength, setMaxLength] = useState(null);
@@ -39,66 +37,65 @@ const SchemaObj = () => {
     let data = '';
     if (objOption === 'Number' || objOption === 'String') {
       data = `{
-       "type": "${objOption}",
-      ${required === 'True' ? '"required": true,' : ''}
-      ${uniq === 'True' ? '"uniq": true,' : ''}
+       "type": "${objOption}"
+      ${required === 'True' ? ',"required": true' : ''}
+      ${uniq === 'True' ? ',"uniq": true' : ''}
       ${
         objOption === 'String' && minLength
-          ? `"minlength": [${minLength}],`
+          ? `,"minlength": [${minLength}]`
           : ''
       }
       ${
         objOption === 'String' && maxLength
-          ? `"maxlength": [${maxLength}],`
+          ? `,"maxlength": [${maxLength}]`
           : ''
       }
       ${
         objOption === 'Number' && maxNumLength
-          ? `"maxlength": [${maxNumLength}],`
+          ? `,"maxlength": [${maxNumLength}]`
           : ''
       }
       ${
         objOption === 'Number' && minNumLength
-          ? `"minlength": [${minNumLength}],`
+          ? `,"minlength": [${minNumLength}]`
           : ''
       }
-      ${objOption === 'Number' && minNumValue ? `"min": [${minNumValue}],` : ''}
-      ${objOption === 'Number' && maxNumValue ? `"max": [${maxNumValue}],` : ''}
-      ${defaultOption === 'Yes' ? `"default" : "${defaultValue}",` : ''}
+      ${objOption === 'Number' && minNumValue ? `,"min": [${minNumValue}]` : ''}
+      ${objOption === 'Number' && maxNumValue ? `,"max": [${maxNumValue}]` : ''}
+      ${defaultOption === 'Yes' ? `,"default" : "${defaultValue}"` : ''}
 },`;
     }
 
     if (objOption === 'Boolean') {
       data = `
       {
-        "type": "${objOption}",
-        ${required === 'True' ? '"required": true,' : ''}
-        ${defaultOption === 'Yes' ? `"default" : "${defaultValue}",` : ''}
+        "type": "${objOption}"
+        ${required === 'True' ? ',"required": true' : ''}
+        ${defaultOption === 'Yes' ? `,"default" : "${defaultValue}"` : ''}
       },
       `;
     }
 
     if (objOption === 'Date') {
       data = ` {
-        "type": "${objOption}",
-        ${required === 'True' ? '"required": true,' : ''}
-        ${defaultOption === 'Yes' ? `"default" : "${defaultValue}",` : ''}
+        "type": "${objOption}"
+        ${required === 'True' ? ',"required": true' : ''}
+        ${defaultOption === 'Yes' ? `,"default" : "${defaultValue}"` : ''}
       },`;
     }
 
     if (objOption === 'Object') {
-      data = `{${objectsArray.join(' ')}},`;
+      data = `{${removeLastComma(objectsArray.join(' '))}},`;
     }
 
     if (objOption === 'Array') {
       data = `[${
         typeof arrayObjects === 'string'
           ? arrayObjects
-          : `{${arrayObjects.join(' ')}},`
+          : `{${removeLastComma(arrayObjects.join(' '))}}`
       }],`;
     }
     setSchemaObj(`${objName} ${data}`);
-    // console.log(schemaObj);
   }, [
     maxLength,
     maxNumLength,

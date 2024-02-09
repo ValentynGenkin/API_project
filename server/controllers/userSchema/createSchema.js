@@ -6,7 +6,6 @@ export const createSchema = async (req, res) => {
   try {
     const token = req.cookies.customer_access;
     const { schemaName, data } = req.body;
-
     if (!token) {
       return res.status(403).json({
         msg: 'Token not provided',

@@ -5,6 +5,7 @@ import TypeNumber from './TypeNumber';
 import TypeArray from './TypeArray';
 import TypeObj from './TypeObj';
 import Button from 'react-bootstrap/esm/Button';
+import { removeLastComma } from '../../util/removeLastComma';
 
 const TypeSelect = ({ ...props }) => {
   const {

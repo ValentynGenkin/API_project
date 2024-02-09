@@ -1,33 +1,56 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Container from 'react-bootstrap/esm/Container';
 import Button from 'react-bootstrap/Button';
 import SchemaObj from '../components/SchemaComponents/SchemaObj';
 import Example from '../components/SchemaComponents/Example';
 
 import '../styles/schemaPage.css';
+import { removeLastComma } from '../util/removeLastComma';
 
 const SchemaPage = () => {
-  const [schemaObj, setSchemaObj] = useState([<SchemaObj />]);
+  const [schemaForSave, setSchemaForSave] = useState([]);
+
+  const [schemaObj, setSchemaObj] = useState(null);
+
+  const [schemaComponent, setSchemaComponent] = useState([
+    <SchemaObj schemaObj={schemaObj} setSchemaObj={setSchemaObj} />,
+  ]);
+
+  const arrayObjSaving = (index) => {
+    let data = [...schemaForSave];
+    data[index] = schemaObj;
+    setSchemaForSave(data);
+  };
+
+  useEffect(() => {
+    if (schemaObj) {
+      arrayObjSaving(schemaComponent.length - 1);
+    }
+  }, [schemaObj]);
+
   return (
     <Container className="schema-page-container">
       <Example />
-      {schemaObj.map((obj, index) => (
+      {schemaComponent.map((obj, index) => (
         <div key={index}>{obj}</div>
       ))}
       <Button
         onClick={() => {
-          setSchemaObj([...schemaObj, <SchemaObj />]);
+          setSchemaComponent([
+            ...schemaComponent,
+            <SchemaObj schemaObj={schemaObj} setSchemaObj={setSchemaObj} />,
+          ]);
         }}
       >
         Add
       </Button>
 
-      {schemaObj.length > 1 ? (
+      {schemaComponent.length > 1 ? (
         <Button
           onClick={() => {
-            if (schemaObj.length > 1) {
-              const updatedSchemaObj = schemaObj.slice(0, -1);
-              setSchemaObj(updatedSchemaObj);
+            if (schemaComponent.length > 1) {
+              const updatedSchemaObj = schemaComponent.slice(0, -1);
+              setSchemaComponent(updatedSchemaObj);
             }
           }}
         >
@@ -35,7 +58,18 @@ const SchemaPage = () => {
         </Button>
       ) : null}
       <Button variant="warning">JSON Check</Button>
-      <Button variant="secondary">Save Schema</Button>
+      <Button
+        variant="secondary"
+        onClick={() => {
+          const aa = JSON.parse(
+            `{${removeLastComma(schemaForSave.join(''))}} `,
+          );
+
+          console.log(JSON.stringify(aa));
+        }}
+      >
+        Save Schema
+      </Button>
     </Container>
   );
 };

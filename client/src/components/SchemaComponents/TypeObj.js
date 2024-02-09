@@ -14,11 +14,9 @@ const TypeObj = ({ setObject }) => {
     if (type) {
       const data = `
       "${keyName}" : {
-        ${type ? `"type" : "${type}",` : ''}
-        ${required === 'True' ? `"required" : "${required}",` : ''}
-        ${uniq === 'True' ? `"uniq" : "${uniq}",` : ''}
-      },
-    `;
+        ${type ? `"type" : "${type}"` : ''}
+        ${required === 'True' ? `,"required" : "${required}"` : ''}
+        ${uniq === 'True' ? `,"uniq" : "${uniq}"` : ''}},`;
 
       setObject(data);
     }

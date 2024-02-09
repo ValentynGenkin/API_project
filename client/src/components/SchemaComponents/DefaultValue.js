@@ -9,7 +9,6 @@ const DefaultValue = ({ defaultOption, setDefaultValue }) => {
         size="sm"
         className="mb-3"
         onChange={(e) => {
-          console.log(e.target.value);
           if (defaultOption === 'Yes') {
             setDefaultValue(e.target.value);
           } else {
