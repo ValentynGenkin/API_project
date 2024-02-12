@@ -6,6 +6,7 @@ import TypeArray from './TypeArray';
 import TypeObj from './TypeObj';
 import Button from 'react-bootstrap/esm/Button';
 import { handleObject } from '../../util/handleObject';
+import { deleteLastItem } from '../../util/deleteLastObj';
 
 const TypeSelect = ({ ...props }) => {
   const {
@@ -109,6 +110,8 @@ const TypeSelect = ({ ...props }) => {
                     const updatedSchemaObj = addKey.slice(0, -1);
                     setAddKey(updatedSchemaObj);
                   }
+                  if (addKey.length === objectsArray.length)
+                    deleteLastItem(objectsArray, setObjectsArray);
                 }}
               >
                 - Delete Key

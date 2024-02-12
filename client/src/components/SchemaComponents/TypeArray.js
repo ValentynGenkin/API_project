@@ -3,6 +3,7 @@ import Form from 'react-bootstrap/Form';
 import ObjInsideArray from './ObjInsideArray';
 import Button from 'react-bootstrap/esm/Button';
 import { handleObject } from '../../util/handleObject';
+import { deleteLastItem } from '../../util/deleteLastObj';
 
 const TypeArray = ({ arrayObjects, setArrayObjects }) => {
   const [objOption, setObjOption] = useState(null);
@@ -82,6 +83,8 @@ const TypeArray = ({ arrayObjects, setArrayObjects }) => {
                   const updatedSchemaObj = addKey.slice(0, -1);
                   setAddKey(updatedSchemaObj);
                 }
+                if (addKey.length === arrayObjects.length)
+                  deleteLastItem(arrayObjects, setArrayObjects);
               }}
             >
               - Delete Key

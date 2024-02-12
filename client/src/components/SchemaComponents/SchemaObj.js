@@ -8,7 +8,7 @@ import TypeSelect from './TypeSelect';
 import camelCase from 'camelcase';
 import { removeLastComma } from '../../util/removeLastComma';
 
-const SchemaObj = ({ schemaObj, setSchemaObj }) => {
+const SchemaObj = ({ setSchemaObj }) => {
   const [objOption, setObjOption] = useState(null);
 
   const [objName, setObjName] = useState(null);
@@ -34,7 +34,7 @@ const SchemaObj = ({ schemaObj, setSchemaObj }) => {
   const [arrayObjects, setArrayObjects] = useState([]);
 
   useEffect(() => {
-    let data = '';
+    let data;
     if (objOption === 'Number' || objOption === 'String') {
       data = `{
        "type": "${objOption}"
@@ -95,7 +95,7 @@ const SchemaObj = ({ schemaObj, setSchemaObj }) => {
           : `{${removeLastComma(arrayObjects.join(' '))}}`
       }],`;
     }
-    setSchemaObj(`${objName} ${data}`);
+    if (objName && data) setSchemaObj(`${objName} ${data}`);
   }, [
     maxLength,
     maxNumLength,

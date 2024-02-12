@@ -7,15 +7,17 @@ import Example from '../components/SchemaComponents/Example';
 import '../styles/schemaPage.css';
 import { removeLastComma } from '../util/removeLastComma';
 import { handleObject } from '../util/handleObject';
+import { deleteLastItem } from '../util/deleteLastObj';
 
 const SchemaPage = () => {
   const [schemaForSave, setSchemaForSave] = useState([]);
 
   const [schemaObj, setSchemaObj] = useState(null);
+
   const [objIndex, setObjIndex] = useState(0);
 
   const [schemaComponent, setSchemaComponent] = useState([
-    <SchemaObj schemaObj={schemaObj} setSchemaObj={setSchemaObj} />,
+    <SchemaObj setSchemaObj={setSchemaObj} />,
   ]);
 
   useEffect(() => {
@@ -41,7 +43,7 @@ const SchemaPage = () => {
         onClick={() => {
           setSchemaComponent([
             ...schemaComponent,
-            <SchemaObj schemaObj={schemaObj} setSchemaObj={setSchemaObj} />,
+            <SchemaObj setSchemaObj={setSchemaObj} />,
           ]);
         }}
       >
@@ -55,6 +57,8 @@ const SchemaPage = () => {
               const updatedSchemaObj = schemaComponent.slice(0, -1);
               setSchemaComponent(updatedSchemaObj);
             }
+            if (schemaComponent.length === schemaForSave.length)
+              deleteLastItem(schemaForSave, setSchemaForSave);
           }}
         >
           Delete
@@ -67,6 +71,8 @@ const SchemaPage = () => {
           const aa = JSON.parse(
             `{${removeLastComma(schemaForSave.join(''))}} `,
           );
+          console.log(aa);
+          console.log(JSON.stringify(aa));
         }}
       >
         Save Schema
