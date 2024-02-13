@@ -3,10 +3,8 @@ import Form from 'react-bootstrap/Form';
 
 const RequiredSelect = ({ props }) => {
   return (
-    <div style={{ display: 'flex', alignItems: 'center' }}>
-      <span style={{ whiteSpace: 'nowrap', marginRight: '5px' }}>
-        required :{' '}
-      </span>
+    <div className="schema-select-container">
+      <span>required : </span>
       <Form.Select
         aria-label="Default select example"
         onChange={(e) => {

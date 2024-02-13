@@ -17,12 +17,11 @@ const ObjInsideArray = ({ setArrayObject }) => {
   }, [keyName, type]);
 
   return (
-    <div style={{ width: '450px' }}>
-      {`{`}
-      <div style={{ display: 'flex' }}>
+    <div className="schema-array-object-block">
+      <div className="schema-array-object-key-name">
         <InputGroup
           size="sm"
-          className="mb-3"
+          className=""
           onChange={(e) => {
             const name = camelCase(e.target.value);
             setKeyName(name);
@@ -34,34 +33,24 @@ const ObjInsideArray = ({ setArrayObject }) => {
             aria-describedby="inputGroup-sizing-sm"
           />
         </InputGroup>
-        {`:`}
       </div>
-      <div style={{ marginLeft: '50px' }}>
-        {`{`}
-        <div style={{ display: 'flex', alignItems: 'center' }}>
-          <span style={{ whiteSpace: 'nowrap', marginRight: '5px' }}>
-            type :{' '}
-          </span>
-          <Form.Select
-            aria-label="Default select example"
-            onChange={(e) => {
-              const type = e.target.value;
-              if (type !== 'Select') {
-                setType(type);
-              }
-            }}
-          >
-            <option>Select</option>
-            <option value="String">String</option>
-            <option value="Number">Number</option>
-          </Form.Select>
-        </div>
-
-        {`},`}
+      <div className="schema-array-object-select">
+        <span>type : </span>
+        <Form.Select
+          size="sm"
+          aria-label="Default select example"
+          onChange={(e) => {
+            const type = e.target.value;
+            if (type !== 'Select') {
+              setType(type);
+            }
+          }}
+        >
+          <option>Select</option>
+          <option value="String">String</option>
+          <option value="Number">Number</option>
+        </Form.Select>
       </div>
-      <br />
-      {`}`}
-      <br />
     </div>
   );
 };

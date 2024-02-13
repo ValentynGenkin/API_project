@@ -23,9 +23,9 @@ const TypeObj = ({ setObject }) => {
   }, [keyName, required, type, uniq]);
 
   return (
-    <div style={{ width: '450px' }}>
+    <div >
       {`{`}
-      <div style={{ display: 'flex' }}>
+      <div >
         <InputGroup
           size="sm"
           className="mb-3"
@@ -42,10 +42,10 @@ const TypeObj = ({ setObject }) => {
         </InputGroup>
         {`:`}
       </div>
-      <div style={{ marginLeft: '50px' }}>
+      <div >
         {`{`}
-        <div style={{ display: 'flex', alignItems: 'center' }}>
-          <span style={{ whiteSpace: 'nowrap', marginRight: '5px' }}>
+        <div >
+          <span >
             type :{' '}
           </span>
           <Form.Select
@@ -64,8 +64,8 @@ const TypeObj = ({ setObject }) => {
             <option value="Date">Date</option>
           </Form.Select>
         </div>
-        <div style={{ display: 'flex', alignItems: 'center' }}>
-          <span style={{ whiteSpace: 'nowrap', marginRight: '5px' }}>
+        <div >
+          <span >
             required :{' '}
           </span>
           <Form.Select
@@ -82,8 +82,8 @@ const TypeObj = ({ setObject }) => {
             <option value="False">False</option>
           </Form.Select>
         </div>
-        <div style={{ display: 'flex', alignItems: 'center' }}>
-          <span style={{ whiteSpace: 'nowrap', marginRight: '5px' }}>
+        <div >
+          <span >
             uniq :{' '}
           </span>
           <Form.Select

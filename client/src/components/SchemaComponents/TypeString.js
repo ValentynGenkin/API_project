@@ -5,17 +5,10 @@ import Form from 'react-bootstrap/Form';
 const TypeString = ({ setMinLength, setMaxLength }) => {
   return (
     <div>
-      <div
-        style={{
-          width: '400px',
-          display: 'flex',
-          gap: '10px',
-          margin: '10px 0',
-        }}
-      >
+      <div className="schema-option-container">
         <InputGroup
           size="sm"
-          className="mb-3"
+          className="mb-3 schema-option-input"
           onChange={(e) => {
             const value = parseInt(e.target.value, 10);
             if (!isNaN(value)) {
@@ -34,7 +27,7 @@ const TypeString = ({ setMinLength, setMaxLength }) => {
         </InputGroup>
         <InputGroup
           size="sm"
-          className="mb-3"
+          className="mb-3 schema-option-input"
           onChange={(e) => {
             const value = parseInt(e.target.value, 10);
             if (!isNaN(value)) {
@@ -52,7 +45,7 @@ const TypeString = ({ setMinLength, setMaxLength }) => {
           />
         </InputGroup>
       </div>
-      <p> If you don'y need this options use - N/A</p>
+      <p>If you don't need these options, ignore them</p>
     </div>
   );
 };

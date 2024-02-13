@@ -3,8 +3,8 @@ import Form from 'react-bootstrap/Form';
 
 const UniqSelect = ({ props }) => {
   return (
-    <div style={{ display: 'flex', alignItems: 'center' }}>
-      <span style={{ whiteSpace: 'nowrap', marginRight: '5px' }}>uniq : </span>
+    <div className="schema-select-container">
+      <span>uniq : </span>
       <Form.Select
         aria-label="Default select example"
         onChange={(e) => {

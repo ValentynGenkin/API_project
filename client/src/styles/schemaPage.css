@@ -1,3 +1,71 @@
 .schema-page-container {
   min-height: calc(100vh - 100px);
 }
+
+.schema-page-obj {
+  width: 50%;
+}
+
+.schema-select-container span {
+  white-space: nowrap;
+  width: 100px;
+  font-weight: bold;
+  margin-right: 15px;
+}
+
+.schema-select-container {
+  display: flex;
+  align-items: center;
+  margin: 10px;
+  max-width: 60%;
+  min-width: 400px;
+}
+
+.schema-select-block {
+  margin-left: 100px;
+}
+
+.schema-option-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.schema-option-input {
+  width: 195px !important;
+  margin-left: 10px;
+}
+
+.schema-default-input {
+  max-width: 400px !important;
+  margin-left: 10px;
+}
+
+.schema-object-name {
+  max-width: 400px;
+  display: flex;
+  white-space: nowrap;
+}
+
+.schema-array-container {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  gap: 5px;
+  max-width: 300px;
+  min-width: 200px;
+  margin-left: 50px;
+}
+
+.schema-array-object-block {
+  margin-left: 100px;
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.schema-array-object-select {
+  display: flex;
+  white-space: nowrap;
+  align-items: center;
+}

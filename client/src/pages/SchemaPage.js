@@ -31,6 +31,7 @@ const SchemaPage = () => {
       <Example />
       {schemaComponent.map((obj, index) => (
         <div
+          className="schema-page-obj"
           key={index}
           onChange={() => {
             setObjIndex(index);

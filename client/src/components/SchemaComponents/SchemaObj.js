@@ -114,61 +114,64 @@ const SchemaObj = ({ setSchemaObj }) => {
   ]);
 
   return (
-    <div style={{ width: '450px' }}>
+    <div>
       {`{`}
-      <div style={{ display: 'flex', flexDirection: 'column' }}>
-        <InputGroup
-          size="sm"
-          className="mb-3"
-          onChange={(e) => {
-            const name = e.target.value;
-            setObjName(`"${camelCase(name)}":`);
-          }}
-        >
-          <InputGroup.Text id="inputGroup-sizing-sm">
-            Object name
-          </InputGroup.Text>
-          <Form.Control
-            aria-label="Small"
-            aria-describedby="inputGroup-sizing-sm"
-          />
-        </InputGroup>
-        {`:`}
-
-        <TypeSelect
-          objOption={objOption}
-          setObjOption={setObjOption}
-          setMaxLength={setMaxLength}
-          setMinLength={setMinLength}
-          setMaxNumLength={setMaxNumLength}
-          setMinNumLength={setMinNumLength}
-          setMaxNumValue={setMaxNumValue}
-          setMinNumValue={setMinNumValue}
-          objectsArray={objectsArray}
-          setObjectsArray={setObjectsArray}
-          arrayObjects={arrayObjects}
-          setArrayObjects={setArrayObjects}
-        />
-
-        {objOption === 'Object' ||
-        objOption === 'Array' ||
-        objOption === 'Select' ? null : (
-          <>
-            <RequiredSelect props={setRequired} />
-            {objOption === 'Boolean' || objOption === 'Date' ? null : (
-              <UniqSelect props={setUniq} />
-            )}
-            <DefaultSelect
-              setDefaultValue={setDefaultValue}
-              defaultOption={defaultOption}
-              setDefaultOption={setDefaultOption}
+      <div>
+        <div className="schema-object-name">
+          <InputGroup
+            size="sm"
+            className="mb-3"
+            onChange={(e) => {
+              const name = e.target.value;
+              setObjName(`"${camelCase(name)}":`);
+            }}
+          >
+            <InputGroup.Text id="inputGroup-sizing-sm">
+              Object name
+            </InputGroup.Text>
+            <Form.Control
+              aria-label="Small"
+              aria-describedby="inputGroup-sizing-sm"
             />
-          </>
-        )}
-        {`},`}
+          </InputGroup>
+          <span>{`: {`}</span>
+        </div>
+        <div className="schema-select-block">
+          <TypeSelect
+            objOption={objOption}
+            setObjOption={setObjOption}
+            setMaxLength={setMaxLength}
+            setMinLength={setMinLength}
+            setMaxNumLength={setMaxNumLength}
+            setMinNumLength={setMinNumLength}
+            setMaxNumValue={setMaxNumValue}
+            setMinNumValue={setMinNumValue}
+            objectsArray={objectsArray}
+            setObjectsArray={setObjectsArray}
+            arrayObjects={arrayObjects}
+            setArrayObjects={setArrayObjects}
+          />
+
+          {objOption === 'Object' ||
+          objOption === 'Array' ||
+          !objOption ? null : (
+            <>
+              <RequiredSelect props={setRequired} />
+              {objOption === 'Boolean' || objOption === 'Date' ? null : (
+                <UniqSelect props={setUniq} />
+              )}
+              <DefaultSelect
+                setDefaultValue={setDefaultValue}
+                defaultOption={defaultOption}
+                setDefaultOption={setDefaultOption}
+              />
+            </>
+          )}
+          {`},`}
+        </div>
       </div>
       <br />
-      {`},`}
+      {`}`}
       <br />
     </div>
   );

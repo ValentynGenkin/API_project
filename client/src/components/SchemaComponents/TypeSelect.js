@@ -38,11 +38,8 @@ const TypeSelect = ({ ...props }) => {
 
   return (
     <div>
-      {`{`}
-      <div>
-        <span style={{ whiteSpace: 'nowrap', marginRight: '5px' }}>
-          type :{' '}
-        </span>
+      <div className="schema-select-container">
+        <span>type : </span>
         <Form.Select
           aria-label="Default select example"
           onChange={(e) => {
@@ -63,63 +60,62 @@ const TypeSelect = ({ ...props }) => {
           <option value="Array">Array</option>
           <option value="Object">Object</option>
         </Form.Select>
-
-        {objOption === 'String' ? (
-          <TypeString setMaxLength={setMaxLength} setMinLength={setMinLength} />
-        ) : null}
-        {objOption === 'Number' ? (
-          <TypeNumber
-            setMaxNumLength={setMaxNumLength}
-            setMinNumLength={setMinNumLength}
-            setMaxNumValue={setMaxNumValue}
-            setMinNumValue={setMinNumValue}
-          />
-        ) : null}
-        {objOption === 'Array' ? (
-          <TypeArray
-            arrayObjects={arrayObjects}
-            setArrayObjects={setArrayObjects}
-          />
-        ) : null}
-        {objOption === 'Object' ? (
-          <>
-            {addKey.map((obj, index) => (
-              <div
-                key={index}
-                onChange={() => {
-                  setObjIndex(index);
-                }}
-              >
-                {obj}
-              </div>
-            ))}
-            {addKey.length <= 2 ? (
-              <Button
-                onClick={() => {
-                  setAddKey([...addKey, <TypeObj setObject={setObject} />]);
-                }}
-              >
-                + Add Key
-              </Button>
-            ) : null}
-
-            {addKey.length > 1 ? (
-              <Button
-                onClick={() => {
-                  if (addKey.length > 1) {
-                    const updatedSchemaObj = addKey.slice(0, -1);
-                    setAddKey(updatedSchemaObj);
-                  }
-                  if (addKey.length === objectsArray.length)
-                    deleteLastItem(objectsArray, setObjectsArray);
-                }}
-              >
-                - Delete Key
-              </Button>
-            ) : null}
-          </>
-        ) : null}
       </div>
+      {objOption === 'String' ? (
+        <TypeString setMaxLength={setMaxLength} setMinLength={setMinLength} />
+      ) : null}
+      {objOption === 'Number' ? (
+        <TypeNumber
+          setMaxNumLength={setMaxNumLength}
+          setMinNumLength={setMinNumLength}
+          setMaxNumValue={setMaxNumValue}
+          setMinNumValue={setMinNumValue}
+        />
+      ) : null}
+      {objOption === 'Array' ? (
+        <TypeArray
+          arrayObjects={arrayObjects}
+          setArrayObjects={setArrayObjects}
+        />
+      ) : null}
+      {objOption === 'Object' ? (
+        <>
+          {addKey.map((obj, index) => (
+            <div
+              key={index}
+              onChange={() => {
+                setObjIndex(index);
+              }}
+            >
+              {obj}
+            </div>
+          ))}
+          {addKey.length <= 2 ? (
+            <Button
+              onClick={() => {
+                setAddKey([...addKey, <TypeObj setObject={setObject} />]);
+              }}
+            >
+              + Add Key
+            </Button>
+          ) : null}
+
+          {addKey.length > 1 ? (
+            <Button
+              onClick={() => {
+                if (addKey.length > 1) {
+                  const updatedSchemaObj = addKey.slice(0, -1);
+                  setAddKey(updatedSchemaObj);
+                }
+                if (addKey.length === objectsArray.length)
+                  deleteLastItem(objectsArray, setObjectsArray);
+              }}
+            >
+              - Delete Key
+            </Button>
+          ) : null}
+        </>
+      ) : null}
     </div>
   );
 };

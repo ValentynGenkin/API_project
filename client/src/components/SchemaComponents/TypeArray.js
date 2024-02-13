@@ -24,33 +24,28 @@ const TypeArray = ({ arrayObjects, setArrayObjects }) => {
   }, [arrayObject, objOption]);
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        width: '250px',
-      }}
-    >
-      {`[`}
-      <span style={{ whiteSpace: 'nowrap', marginRight: '5px' }}>type : </span>
-      <Form.Select
-        aria-label="Default select example"
-        onChange={(e) => {
-          setObjOption(e.target.value);
+    <>
+      <div className="schema-array-container">
+        <span>{`[`}</span>
+        <span>{`type :`} </span>
+        <Form.Select
+          aria-label="Default select example"
+          onChange={(e) => {
+            setObjOption(e.target.value);
 
-          if (e.target.value === 'Object') {
-            setAddKey([<ObjInsideArray setArrayObject={setArrayObject} />]);
-            setArrayObjects([]);
-          }
-        }}
-      >
-        <option>Select</option>
-        <option value="String">String</option>
-        <option value="Number">Number</option>
-        <option value="Object">Object</option>
-      </Form.Select>
-
+            if (e.target.value === 'Object') {
+              setAddKey([<ObjInsideArray setArrayObject={setArrayObject} />]);
+              setArrayObjects([]);
+            }
+          }}
+        >
+          <option>Select</option>
+          <option value="String">String</option>
+          <option value="Number">Number</option>
+          <option value="Object">Object</option>
+        </Form.Select>
+        <span>{`]`}</span>
+      </div>
       {objOption === 'Object' ? (
         <>
           {addKey.map((obj, index) => (
@@ -92,9 +87,7 @@ const TypeArray = ({ arrayObjects, setArrayObjects }) => {
           ) : null}
         </>
       ) : null}
-
-      {`]`}
-    </div>
+    </>
   );
 };
 

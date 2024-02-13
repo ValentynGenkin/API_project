@@ -8,31 +8,28 @@ const DefaultSelect = ({
   setDefaultOption,
 }) => {
   return (
-    <div
-      style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
-    >
-      <span style={{ whiteSpace: 'nowrap', marginRight: '5px' }}>
-        default :{' '}
-      </span>
-      <Form.Select
-        aria-label="Default select example"
-        onChange={(e) => {
-          const option = e.target.value;
-          setDefaultOption(option);
-        }}
-      >
-        <option>Select</option>
-        <option value="No">No</option>
-        <option value="Yes">Yes</option>
-      </Form.Select>
-
+    <>
+      <div className="schema-select-container">
+        <span>default : </span>
+        <Form.Select
+          aria-label="Default select example"
+          onChange={(e) => {
+            const option = e.target.value;
+            setDefaultOption(option);
+          }}
+        >
+          <option>Select</option>
+          <option value="No">No</option>
+          <option value="Yes">Yes</option>
+        </Form.Select>
+      </div>
       {defaultOption === 'Yes' ? (
         <DefaultValue
           defaultOption={defaultOption}
           setDefaultValue={setDefaultValue}
         />
       ) : null}
-    </div>
+    </>
   );
 };
 

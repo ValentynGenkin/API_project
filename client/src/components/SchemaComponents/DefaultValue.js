@@ -4,29 +4,31 @@ import Form from 'react-bootstrap/Form';
 
 const DefaultValue = ({ defaultOption, setDefaultValue }) => {
   return (
-    <div style={{ width: '250px' }}>
-      <InputGroup
-        size="sm"
-        className="mb-3"
-        onChange={(e) => {
-          if (defaultOption === 'Yes') {
-            setDefaultValue(e.target.value);
-          } else {
-            setDefaultValue(null);
-          }
-        }}
-      >
-        <InputGroup.Text id="inputGroup-sizing-sm">
-          Default value
-        </InputGroup.Text>
-        <Form.Control
-          type="text"
-          aria-label="Small"
-          aria-describedby="inputGroup-sizing-sm"
-        />
-      </InputGroup>
+    <>
+      <div>
+        <InputGroup
+          size="sm"
+          className="mb-3 schema-default-input"
+          onChange={(e) => {
+            if (defaultOption === 'Yes') {
+              setDefaultValue(e.target.value);
+            } else {
+              setDefaultValue(null);
+            }
+          }}
+        >
+          <InputGroup.Text id="inputGroup-sizing-sm">
+            Default value
+          </InputGroup.Text>
+          <Form.Control
+            type="text"
+            aria-label="Small"
+            aria-describedby="inputGroup-sizing-sm"
+          />
+        </InputGroup>
+      </div>
       <p>You can use a boolean value (true, false) or any string or number</p>
-    </div>
+    </>
   );
 };
 

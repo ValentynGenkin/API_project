@@ -1,60 +1,65 @@
 import React from 'react';
+import Accordion from 'react-bootstrap/Accordion';
 
 const Example = () => {
   return (
-    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-      <pre>
-        {`
-      JSON example:
-      {
-        "name": {
-          "type": "String",
-          "required": true,
-          "minlength": [6]
-        },
-        "age": {
-          "type": "Number",
-          "required": true,
-          "min": 0,
-          "max": 99
-        },
-        "address": {
-          "city": {
-            "type": "String",
-            "required": false,
-            "default": null
-          },
-          "country": {
-            "type": "String",
-            "required": false,
-            "default": null
-          }
-        },
-        "phone": {
-          "type": "Number",
-          "minlength": [6],
-          "maxlength": [15],
-          "unique": true
-        },
-        "hobbies": {
-          "type": ["String"]
-        },
-        "friends": [
-          {
-            "name": "String",
-            "age": "Number"
-          }
-        ],
-        "createdAt": {
-          "type": "Date",
-          "default": "new Date()"
-        }
-      }
+    <Accordion style={{ width: '90%', margin: '25px auto' }}>
+      <Accordion.Item eventKey="0">
+        <Accordion.Header>Constructor description and example</Accordion.Header>
+        <Accordion.Body>
+          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+            <pre>
+              {`
+JSON example:
+{
+  "name": {
+    "type": "String",
+    "required": true,
+    "minlength": [6]
+  },
+  "age": {
+    "type": "Number",
+    "required": true,
+    "min": 0,
+    "max": 99
+  },
+  "address": {
+    "city": {
+      "type": "String",
+      "required": false,
+      "default": null
+    },
+    "country": {
+      "type": "String",
+      "required": false,
+      "default": null
+    }
+  },
+  "phone": {
+    "type": "Number",
+    "minlength": [6],
+    "maxlength": [15],
+    "unique": true
+  },
+  "hobbies": {
+    "type": ["String"]
+  },
+  "friends": [
+    {
+      "name": "String",
+      "age": "Number"
+    }
+  ],
+  "createdAt": {
+    "type": "Date",
+    "default": "new Date()"
+  }
+}
   `}
-      </pre>
+            </pre>
 
-      <pre>
-        {`
+            <pre>
+              {`
 Description:
 
 name:
@@ -100,8 +105,11 @@ type: Date - Specifies that the 'createdAt' field should contain a date.
 default: new Date() - Sets the default value of the 'createdAt' field to the current date.
 
 `}
-      </pre>
-    </div>
+            </pre>
+          </div>
+        </Accordion.Body>
+      </Accordion.Item>
+    </Accordion>
   );
 };
 
