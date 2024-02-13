@@ -69,3 +69,7 @@
   white-space: nowrap;
   align-items: center;
 }
+
+.schema-constructor-btn {
+  margin: 10px;
+}

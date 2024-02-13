@@ -8,6 +8,7 @@ import '../styles/schemaPage.css';
 import { removeLastComma } from '../util/removeLastComma';
 import { handleObject } from '../util/handleObject';
 import { deleteLastItem } from '../util/deleteLastObj';
+import JSONCheck from '../components/SchemaComponents/JSONCheck';
 
 const SchemaPage = () => {
   const [schemaForSave, setSchemaForSave] = useState([]);
@@ -26,6 +27,14 @@ const SchemaPage = () => {
     }
   }, [schemaObj]);
 
+  const jsonForCheck = () => {
+    const jsonText = JSON.parse(
+      `{${removeLastComma(schemaForSave.join(''))}} `,
+    );
+
+    return JSON.stringify(jsonText, null, 2);
+  };
+
   return (
     <Container className="schema-page-container">
       <Example />
@@ -41,6 +50,7 @@ const SchemaPage = () => {
         </div>
       ))}
       <Button
+        className="schema-constructor-btn"
         onClick={() => {
           setSchemaComponent([
             ...schemaComponent,
@@ -53,6 +63,7 @@ const SchemaPage = () => {
 
       {schemaComponent.length > 1 ? (
         <Button
+          className="schema-constructor-btn"
           onClick={() => {
             if (schemaComponent.length > 1) {
               const updatedSchemaObj = schemaComponent.slice(0, -1);
@@ -65,17 +76,9 @@ const SchemaPage = () => {
           Delete
         </Button>
       ) : null}
-      <Button variant="warning">JSON Check</Button>
-      <Button
-        variant="secondary"
-        onClick={() => {
-          const aa = JSON.parse(
-            `{${removeLastComma(schemaForSave.join(''))}} `,
-          );
-          console.log(aa);
-          console.log(JSON.stringify(aa));
-        }}
-      >
+
+      <JSONCheck jsonExample={<pre>{jsonForCheck()}</pre>} />
+      <Button className="schema-constructor-btn" variant="secondary">
         Save Schema
       </Button>
     </Container>

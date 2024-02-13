@@ -23,9 +23,9 @@ const TypeObj = ({ setObject }) => {
   }, [keyName, required, type, uniq]);
 
   return (
-    <div >
+    <div style={{ marginLeft: '100px' }}>
       {`{`}
-      <div >
+      <div className="schema-object-name">
         <InputGroup
           size="sm"
           className="mb-3"
@@ -40,14 +40,11 @@ const TypeObj = ({ setObject }) => {
             aria-describedby="inputGroup-sizing-sm"
           />
         </InputGroup>
-        {`:`}
+        <span>{`: {`}</span>
       </div>
-      <div >
-        {`{`}
-        <div >
-          <span >
-            type :{' '}
-          </span>
+      <div style={{ marginLeft: '100px' }}>
+        <div className="schema-select-container">
+          <span>type : </span>
           <Form.Select
             aria-label="Default select example"
             onChange={(e) => {
@@ -64,10 +61,8 @@ const TypeObj = ({ setObject }) => {
             <option value="Date">Date</option>
           </Form.Select>
         </div>
-        <div >
-          <span >
-            required :{' '}
-          </span>
+        <div className="schema-select-container">
+          <span>required : </span>
           <Form.Select
             aria-label="Default select example"
             onChange={(e) => {
@@ -82,10 +77,8 @@ const TypeObj = ({ setObject }) => {
             <option value="False">False</option>
           </Form.Select>
         </div>
-        <div >
-          <span >
-            uniq :{' '}
-          </span>
+        <div className="schema-select-container">
+          <span>uniq : </span>
           <Form.Select
             aria-label="Default select example"
             onChange={(e) => {
@@ -100,11 +93,9 @@ const TypeObj = ({ setObject }) => {
             <option value="False">False</option>
           </Form.Select>
         </div>
-        {`},`}
       </div>
-      <br />
+
       {`}`}
-      <br />
     </div>
   );
 };

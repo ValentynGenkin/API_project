@@ -60,6 +60,8 @@ const TypeArray = ({ arrayObjects, setArrayObjects }) => {
           ))}
           {addKey.length <= 2 ? (
             <Button
+              className="schema-constructor-btn"
+              variant="outline-secondary"
               onClick={() => {
                 setAddKey([
                   ...addKey,
@@ -73,6 +75,8 @@ const TypeArray = ({ arrayObjects, setArrayObjects }) => {
 
           {addKey.length > 1 ? (
             <Button
+              className="schema-constructor-btn"
+              variant="outline-secondary"
               onClick={() => {
                 if (addKey.length > 1) {
                   const updatedSchemaObj = addKey.slice(0, -1);
