@@ -3,9 +3,11 @@ import authRouter from './routes/auth.js';
 import cookieParser from 'cookie-parser';
 import schemaRouter from './routes/schema.js';
 import usersRouter from './routes/usersRoutes.js';
+import cors from 'cors';
 
 const app = express();
 
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());

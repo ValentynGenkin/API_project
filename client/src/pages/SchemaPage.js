@@ -11,6 +11,7 @@ import { handleObject } from '../util/handleObject';
 import { deleteLastItem } from '../util/deleteLastObj';
 import JSONCheck from '../components/SchemaComponents/JSONCheck';
 import camelCase from 'camelcase';
+import useFetch from '../hooks/useFetch';
 
 const SchemaPage = () => {
   const [schemaForSave, setSchemaForSave] = useState([]);
@@ -30,6 +31,21 @@ const SchemaPage = () => {
       handleObject(objIndex, schemaForSave, schemaObj, setSchemaForSave);
     }
   }, [schemaObj]);
+
+  const [data, isLoading, error, fetchData] = useFetch(
+    'http://localhost:5000/api/schema/create-schema',
+  );
+
+  const createSchema = () => {
+    fetchData({
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer 1634ccac-ed8b-4a29-acb4-d00f2ee99299',
+      },
+      body: JSON.stringify(),
+    });
+  };
 
   const jsonForCheck = () => {
     const jsonText = JSON.parse(
@@ -100,9 +116,17 @@ const SchemaPage = () => {
       ) : null}
 
       <JSONCheck jsonExample={<pre>{jsonForCheck()}</pre>} />
-      <Button className="schema-constructor-btn" variant="secondary">
+      <Button
+        className="schema-constructor-btn"
+        variant="secondary"
+        onClick={() => {
+          createSchema();
+        }}
+      >
         Save Schema
       </Button>
+      {data && <div>{data.toString()}</div>}
+      {error && <div>{error.toString()}</div>}
     </Container>
   );
 };
