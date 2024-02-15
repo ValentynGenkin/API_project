@@ -10,6 +10,7 @@ export const login = async (req, res) => {
 
     if (!email || !password) {
       return res.status(400).json({
+        success: false,
         msg: 'Check email and/or password',
       });
     }
@@ -17,12 +18,10 @@ export const login = async (req, res) => {
     const user = await User.findOne({ email: email }).select('+password');
     if (!user || !comparePassword(password, user.password)) {
       return res.status(401).json({
+        success: false,
         msg: 'Invalid username or password.',
       });
     }
-
-    const userObject = user.toObject();
-    delete userObject.password;
 
     const token = await user.createJWTToken();
 
@@ -35,7 +34,7 @@ export const login = async (req, res) => {
         ),
         secure: false,
       })
-      .json({ userObject });
+      .json({ success: true });
   } catch (error) {
     console.error('Login error', error);
     return res.status(500).json({

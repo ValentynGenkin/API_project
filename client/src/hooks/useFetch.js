@@ -3,21 +3,20 @@ import { useState } from 'react';
 function useFetch(url) {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   const fetchData = async (options) => {
-    setIsLoading(true);
     try {
-      const response = await fetch(url, options);
+      setIsLoading(true);
+      const response = await fetch(
+        `${process.env.REACT_APP_DEV_SERVER}${url}`,
+        options,
+      );
 
       const jsonResult = await response.json();
 
       if (!response.ok) {
-        setError(
-          `HTTP Error! Status: ${response.status} ${
-            jsonResult ? jsonResult.msg : ''
-          }`,
-        );
+        setError(` Error! ${jsonResult ? jsonResult.msg : ''}`);
         throw new Error(
           `HTTP Error! Status: ${response.status} ${
             jsonResult ? jsonResult.msg : ''
@@ -25,13 +24,13 @@ function useFetch(url) {
         );
       }
 
-      const data = await response.json();
-
-      setData(data);
+      setData(jsonResult);
       setError(null);
       setIsLoading(false);
     } catch (error) {
       console.error(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
