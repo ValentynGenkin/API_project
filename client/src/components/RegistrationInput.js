@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/esm/Button';
 import { Link, useNavigate } from 'react-router-dom';
 
 function RegistrationInput() {
   const navigation = useNavigate();
+
+  const [userData, setUserData] = useState({});
 
   return (
     <>

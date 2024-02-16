@@ -7,9 +7,9 @@ dotenv.config();
 export const authentication = async (req, res) => {
   try {
     const token = req.cookies?.customer_access;
-
     if (!token) {
       return res.status(403).json({
+        success: false,
         msg: 'Token not provided',
       });
     }
@@ -18,6 +18,7 @@ export const authentication = async (req, res) => {
 
     if (!id) {
       return res.status(403).json({
+        success: false,
         msg: 'Invalid or expired token',
       });
     }
@@ -25,11 +26,12 @@ export const authentication = async (req, res) => {
 
     if (!user) {
       return res.status(404).json({
+        success: false,
         msg: 'User not found',
       });
     }
 
-    return res.status(200).json(user);
+    return res.status(200).json({ success: true, user });
   } catch (error) {
     console.error('Authentication error', error);
     return res.status(500).json({

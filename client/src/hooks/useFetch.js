@@ -13,9 +13,8 @@ function useFetch(url) {
         options,
       );
 
-      const jsonResult = await response.json();
-
       if (!response.ok) {
+        const jsonResult = await response.json();
         setError(` Error! ${jsonResult ? jsonResult.msg : ''}`);
         throw new Error(
           `HTTP Error! Status: ${response.status} ${
@@ -23,6 +22,7 @@ function useFetch(url) {
           }`,
         );
       }
+      const jsonResult = await response.json();
 
       setData(jsonResult);
       setError(null);
