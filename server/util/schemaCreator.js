@@ -6,18 +6,17 @@ export const createNewSchema = async (userId, schemaName, data) => {
     const filePath = `${folderPath}/${schemaName}.js`;
 
     await mkdir(folderPath, { recursive: true });
-    const dataToSTring = JSON.stringify(data);
-    const preparedData = dataToSTring.replace(/["']/g, '');
+    const preparedData = data.replace(/["']/g, '');
 
     const schemaData = `
     import mongoose from 'mongoose';
 
-    const ${schemaName}Schema = new mongoose.Schema(
+    const Schema${schemaName} = new mongoose.Schema(
 
       ${preparedData}
       , { versionKey: false }
     );
-    const id_${userId} = mongoose.model("${userId}", ${schemaName}Schema);
+    const id_${userId} = mongoose.model("${userId}", Schema${schemaName});
 
     export default id_${userId};
     `;

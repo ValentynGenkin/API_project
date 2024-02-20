@@ -10,6 +10,7 @@
     "camelcase": "^8.0.0",
     "jquery": "^3.7.1",
     "jsonc-parser": "^3.2.1",
+    "pascalcase": "^2.0.0",
     "react": "^18.2.0",
     "react-bootstrap": "^2.10.0",
     "react-dom": "^18.2.0",

@@ -67,17 +67,15 @@ const SchemaObj = ({ setSchemaObj }) => {
     }
 
     if (objOption === 'Boolean') {
-      data = `
-      {
+      data = `{
         "type": "${objOption}"
         ${required === 'True' ? ',"required": true' : ''}
         ${defaultOption === 'Yes' ? `,"default" : "${defaultValue}"` : ''}
-      },
-      `;
+      },`;
     }
 
     if (objOption === 'Date') {
-      data = ` {
+      data = `{
         "type": "${objOption}"
         ${required === 'True' ? ',"required": true' : ''}
         ${defaultOption === 'Yes' ? `,"default" : "${defaultValue}"` : ''}

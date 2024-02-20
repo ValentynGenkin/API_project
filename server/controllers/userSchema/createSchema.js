@@ -8,6 +8,7 @@ export const createSchema = async (req, res) => {
     const { schemaName, data } = req.body;
     if (!token) {
       return res.status(403).json({
+        success: false,
         msg: 'Token not provided',
       });
     }
@@ -16,12 +17,14 @@ export const createSchema = async (req, res) => {
 
     if (!id) {
       return res.status(403).json({
+        success: false,
         msg: 'Invalid or expired token',
       });
     }
 
     if (!schemaName || !data) {
       return res.status(400).json({
+        success: false,
         msg: 'Missing required fields',
       });
     }
@@ -31,8 +34,8 @@ export const createSchema = async (req, res) => {
     await User.updateOne({ _id: id }, { $set: { schemaName: schemaName } });
 
     return res.status(200).json({
+      success: true,
       mgs: 'Schema created',
-      schema: data,
     });
   } catch (error) {
     console.error('Error creating schema', error);
