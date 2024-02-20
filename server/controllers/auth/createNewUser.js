@@ -5,10 +5,11 @@ export const createNewUser = async (req, res) => {
   const APIkey = uuid();
 
   try {
-    const { firstName, lastName, email, password, birthday, phone } = req.body;
+    const { firstName, lastName, email, password, birthday } = req.body;
 
-    if (!firstName || !lastName || !email || !password || !birthday || !phone) {
+    if (!firstName || !lastName || !email || !password || !birthday) {
       return res.status(400).json({
+        success: false,
         msg: 'Missing required fields',
         fields: {
           firstName: 'name',
@@ -16,7 +17,6 @@ export const createNewUser = async (req, res) => {
           email: 'e-mail',
           password: 'password',
           birthday: 'yyyy-mm-dd',
-          phone: 'phone number',
         },
       });
     }
@@ -25,6 +25,7 @@ export const createNewUser = async (req, res) => {
 
     if (emailCheck) {
       return res.status(400).json({
+        success: false,
         msg: 'Used email already registered',
       });
     } else {
@@ -34,18 +35,21 @@ export const createNewUser = async (req, res) => {
         email,
         password,
         birthday,
-        phone,
         APIkey,
       });
 
-      const userObject = user.toObject();
+      const token = await user.createJWTToken();
 
-      delete userObject.password;
-
-      return res.status(201).json({
-        msg: 'New user created',
-        user: userObject,
-      });
+      return res
+        .status(201)
+        .cookie('customer_access', token, {
+          httpOnly: true,
+          expires: new Date(
+            Date.now() + parseInt(process.env.JWE_EXPIRE_TIME) * 1000,
+          ),
+          secure: false,
+        })
+        .json({ success: true });
     }
   } catch (error) {
     console.error('Error creating user', error);

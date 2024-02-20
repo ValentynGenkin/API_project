@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/esm/Button';
 import { Link, useNavigate } from 'react-router-dom';
 import { isValidName } from '../util/nameValidation';
 import { isValidEmail } from '../util/emailValidation';
+import useFetch from '../hooks/useFetch';
+import Spinner from 'react-bootstrap/esm/Spinner';
 
 function RegistrationInput() {
   const navigation = useNavigate();
@@ -34,6 +36,25 @@ function RegistrationInput() {
 
     return true;
   };
+
+  const [data, isLoading, error, fetchData] = useFetch(`api/auth/registration`);
+
+  const createUser = () => {
+    fetchData({
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+      body: JSON.stringify(userData),
+    });
+  };
+
+  useEffect(() => {
+    if (data && data.success) {
+      navigation('/user-menu');
+    }
+  }, [data]);
 
   return (
     <>
@@ -125,11 +146,26 @@ function RegistrationInput() {
             onClick={() => {
               if (userDataCheck()) {
                 setFormError(null);
-                console.log(userData);
+                createUser();
               }
             }}
           >
-            Submit
+            {isLoading ? (
+              <>
+                {' '}
+                <Spinner
+                  as="span"
+                  animation="border"
+                  size="sm"
+                  role="status"
+                  aria-hidden="true"
+                  className="loading-spinner"
+                />
+                <span className="visually-hidden">Loading...</span>
+              </>
+            ) : (
+              'Submit'
+            )}
           </Button>
           <Button
             variant="outline-danger"
@@ -141,6 +177,7 @@ function RegistrationInput() {
           </Button>
         </div>
         {formError ? <p>{formError}</p> : null}
+        {error ? <p>{error.toString()}</p> : null}
       </div>
     </>
   );
