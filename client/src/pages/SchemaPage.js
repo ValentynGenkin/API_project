@@ -16,6 +16,7 @@ import Spinner from 'react-bootstrap/esm/Spinner';
 import { default as useFetchAuth } from '../hooks/useFetch';
 import { jsonForCheck } from '../util/jsonFormCheck';
 import { useNavigate } from 'react-router-dom';
+import CreatedSchema from '../components/CreatedSchema';
 
 const SchemaPage = () => {
   const navigation = useNavigate();
@@ -88,15 +89,20 @@ const SchemaPage = () => {
     }
   }, [data]);
 
+  useEffect(() => {
+    if (creationMsg) {
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
+    }
+  }, [creationMsg]);
+
   return (
     <Container className="schema-page-container">
       <Example />
       {authData &&
         (authData.success && authData.schema ? (
-          <>
-            <p>{authData.schemaName}</p>
-            <pre>{authData.schema}</pre>
-          </>
+          <CreatedSchema schemaData={authData} nav={navigation} />
         ) : !creationMsg ? (
           <>
             <div className="schema-object-name">
