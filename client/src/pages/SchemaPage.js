@@ -14,6 +14,8 @@ import pascalCase from 'pascalcase';
 import useFetch from '../hooks/useFetch';
 import Spinner from 'react-bootstrap/esm/Spinner';
 
+import { default as useFetchSchema } from '../hooks/useFetch';
+
 const SchemaPage = () => {
   const [schemaForSave, setSchemaForSave] = useState([]);
 

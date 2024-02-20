@@ -31,7 +31,10 @@ export const createSchema = async (req, res) => {
 
     await createNewSchema(id, schemaName, data);
 
-    await User.updateOne({ _id: id }, { $set: { schemaName: schemaName } });
+    await User.updateOne(
+      { _id: id },
+      { $set: { schemaName: schemaName, schemaStructure: data } },
+    );
 
     return res.status(200).json({
       success: true,

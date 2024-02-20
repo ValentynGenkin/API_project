@@ -39,6 +39,10 @@ const userSchema = new mongoose.Schema(
       type: String,
       require: false,
     },
+    schemaStructure: {
+      type: String,
+      require: false,
+    },
   },
   { versionKey: false },
 );
