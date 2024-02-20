@@ -45,6 +45,7 @@ export const deleteSchema = async (req, res) => {
         $unset: {
           schemaName: '',
           endpointName: '',
+          schemaStructure: '',
         },
       },
     );

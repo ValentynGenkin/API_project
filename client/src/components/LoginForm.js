@@ -115,7 +115,7 @@ const LoginForm = () => {
               )}
             </Button>
             {loginError ? <p>Check email and/or login</p> : null}
-            {error && <p>{error.toString()}</p>}
+            {error && <p>{error.msg}</p>}
           </Form>
         </div>
       )}

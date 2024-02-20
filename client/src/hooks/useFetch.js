@@ -15,7 +15,7 @@ function useFetch(url) {
 
       if (!response.ok) {
         const jsonResult = await response.json();
-        setError(` Error! ${jsonResult ? jsonResult.msg : ''}`);
+        setError(jsonResult);
         throw new Error(
           `HTTP Error! Status: ${response.status} ${
             jsonResult ? jsonResult.msg : ''

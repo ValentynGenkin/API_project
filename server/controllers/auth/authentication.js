@@ -31,7 +31,21 @@ export const authentication = async (req, res) => {
       });
     }
 
-    return res.status(200).json({ success: true, user });
+    const requestPath = req.url;
+
+    if (
+      requestPath === '/schema-authentication' &&
+      user.schemaStructure &&
+      user.schemaStructure !== ''
+    ) {
+      return res.status(200).json({
+        success: true,
+        schema: user.schemaStructure,
+        schemaName: user.schemaName,
+      });
+    }
+
+    return res.status(200).json({ success: true });
   } catch (error) {
     console.error('Authentication error', error);
     return res.status(500).json({

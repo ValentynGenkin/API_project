@@ -11,6 +11,7 @@ authRouter.post('/registration', createNewUser);
 authRouter.post('/login', login);
 authRouter.get('/logout', logout);
 authRouter.get('/authentication', authentication);
+authRouter.get('/schema-authentication', authentication);
 authRouter.delete('/delete-user', deleteUser);
 
 export default authRouter;
