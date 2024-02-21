@@ -9,12 +9,14 @@ export const createEndpoints = async (req, res) => {
 
     if (!endpointName) {
       return res.status(400).json({
-        msg: 'Missing required fields',
+        success: false,
+        msg: 'Missing endpoint name',
       });
     }
 
     if (!token) {
       return res.status(403).json({
+        success: false,
         msg: 'Token not provided',
       });
     }
@@ -23,6 +25,7 @@ export const createEndpoints = async (req, res) => {
 
     if (!id) {
       return res.status(403).json({
+        success: false,
         msg: 'Invalid or expired token',
       });
     }
@@ -31,6 +34,7 @@ export const createEndpoints = async (req, res) => {
 
     if (endpointCheck) {
       return res.status(409).json({
+        success: false,
         msg: 'Provided endpoint already exist',
       });
     }
@@ -38,6 +42,7 @@ export const createEndpoints = async (req, res) => {
     await User.updateOne({ _id: id }, { $set: { endpointName: endpointName } });
 
     return res.status(200).json({
+      success: true,
       msg: 'Endpoints created successfully',
     });
   } catch (error) {

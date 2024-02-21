@@ -1,3 +1,30 @@
 .endpoints-page-container {
   min-height: calc(100vh - 100px);
 }
+
+.fetch-example {
+  font-weight: bold;
+}
+
+.exist-endpoint {
+  display: flex;
+  border: 1px solid lightgrey;
+  border-radius: 5px;
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
+.exist-endpoint span {
+  width: 150px;
+  font-size: 17px;
+  font-weight: bold;
+}
+
+.exist-endpoint p {
+  margin: 0;
+  padding: 0;
+}
+
+.exist-endpoint-method {
+  width: 150px;
+}

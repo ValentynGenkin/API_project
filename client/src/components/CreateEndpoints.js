@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/esm/Button';
 import { useNavigate } from 'react-router-dom';
+import Spinner from 'react-bootstrap/esm/Spinner';
 
-const CreateEndpoints = () => {
+const CreateEndpoints = ({ setEndpointName, createFunc, loading }) => {
   const nav = useNavigate();
-  const [endpointName, setEndpointName] = useState(null);
 
   return (
     <>
@@ -28,8 +28,31 @@ const CreateEndpoints = () => {
             aria-describedby="inputGroup-sizing-sm"
           />
         </InputGroup>
-        <Button>Create</Button>
         <Button
+          className="schema-constructor-btn"
+          variant="secondary"
+          onClick={() => {
+            createFunc();
+          }}
+        >
+          {loading ? (
+            <>
+              <Spinner
+                as="span"
+                animation="border"
+                size="sm"
+                role="status"
+                aria-hidden="true"
+                className="loading-spinner"
+              />
+              <span className="visually-hidden">Loading...</span>
+            </>
+          ) : (
+            'Create'
+          )}
+        </Button>
+        <Button
+          className="schema-constructor-btn"
           onClick={() => {
             nav(-1);
           }}

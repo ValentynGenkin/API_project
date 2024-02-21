@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
-
 import Button from 'react-bootstrap/Button';
-
 import useFetch from '../hooks/useFetch';
 import PopUp from './PopUp';
 import { useNavigate } from 'react-router-dom';
@@ -45,6 +43,7 @@ const CreatedSchema = ({ schemaData, nav }) => {
       </div>
       <div>
         <Button
+          variant="secondary"
           className="schema-constructor-btn"
           onClick={() => {
             nav(-1);
@@ -57,7 +56,7 @@ const CreatedSchema = ({ schemaData, nav }) => {
           variant="danger"
           onClick={() => setModalShow(true)}
         >
-          Delete Schema
+          Delete API
         </Button>
       </div>
       <PopUp

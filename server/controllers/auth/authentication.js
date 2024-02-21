@@ -45,6 +45,17 @@ export const authentication = async (req, res) => {
       });
     }
 
+    if (
+      requestPath === '/endpoint-authentication' &&
+      user.endpointName &&
+      user.endpointName !== ''
+    ) {
+      return res.status(200).json({
+        success: true,
+        endpointName: user.endpointName,
+      });
+    }
+
     return res.status(200).json({ success: true });
   } catch (error) {
     console.error('Authentication error', error);

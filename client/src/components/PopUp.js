@@ -13,9 +13,7 @@ const PopUp = (props) => {
       centered
     >
       <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">
-          Delete Schema
-        </Modal.Title>
+        <Modal.Title id="contained-modal-title-vcenter">Delete API</Modal.Title>
       </Modal.Header>
       {response && response.success ? (
         <>

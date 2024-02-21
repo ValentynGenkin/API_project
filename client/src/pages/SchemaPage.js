@@ -16,7 +16,7 @@ import Spinner from 'react-bootstrap/esm/Spinner';
 import { default as useFetchAuth } from '../hooks/useFetch';
 import { jsonForCheck } from '../util/jsonFormCheck';
 import { useNavigate } from 'react-router-dom';
-import CreatedSchema from '../components/CreatedSchema';
+import CreatedSchema from '../components/ExistSchema';
 
 const SchemaPage = () => {
   const navigation = useNavigate();
