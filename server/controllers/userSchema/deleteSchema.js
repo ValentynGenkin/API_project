@@ -11,6 +11,7 @@ export const deleteSchema = async (req, res) => {
 
     if (!token) {
       return res.status(403).json({
+        success: false,
         msg: 'Token not provided',
       });
     }
@@ -19,6 +20,7 @@ export const deleteSchema = async (req, res) => {
 
     if (!password) {
       return res.status(401).json({
+        success: false,
         msg: 'Password missing',
       });
     }
@@ -27,6 +29,7 @@ export const deleteSchema = async (req, res) => {
 
     if (!id) {
       return res.status(403).json({
+        success: false,
         msg: 'Invalid or expired token',
       });
     }
@@ -35,6 +38,7 @@ export const deleteSchema = async (req, res) => {
 
     if (!user || !comparePassword(password, user.password)) {
       return res.status(401).json({
+        success: false,
         msg: 'Invalid password.',
       });
     }
@@ -73,6 +77,7 @@ export const deleteSchema = async (req, res) => {
     }
 
     return res.status(200).json({
+      success: true,
       msg: 'API deleted successfully',
     });
   } catch (error) {

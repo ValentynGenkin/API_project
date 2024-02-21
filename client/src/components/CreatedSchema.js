@@ -1,26 +1,37 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Button from 'react-bootstrap/Button';
 
 import useFetch from '../hooks/useFetch';
 import PopUp from './PopUp';
+import { useNavigate } from 'react-router-dom';
 
 const CreatedSchema = ({ schemaData, nav }) => {
   const [modalShow, setModalShow] = useState(false);
-  const [data, isLoading, error, fetchData] = useFetch(
-    `api/schema/create-schema`,
-  );
+  const [password, setPassword] = useState(null);
+  const [data, isLoading, error, fetchData] = useFetch(`api/schema/delete-api`);
+  const navigation = useNavigate();
 
   const deleteSchema = () => {
-    fetchData({
-      method: 'DELETE',
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(),
-    });
+    if (password) {
+      fetchData({
+        method: 'DELETE',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ password: `${password}` }),
+      });
+    }
   };
+
+  useEffect(() => {
+    if (data && data.success) {
+      setTimeout(() => {
+        navigation('/user-menu');
+      }, 2000);
+    }
+  }, [data]);
 
   return (
     <>
@@ -36,7 +47,15 @@ const CreatedSchema = ({ schemaData, nav }) => {
       <Button variant="danger" onClick={() => setModalShow(true)}>
         Delete Schema
       </Button>
-      <PopUp show={modalShow} onHide={() => setModalShow(false)} />
+      <PopUp
+        response={data}
+        password={setPassword}
+        loading={isLoading}
+        error={error}
+        deleteFunc={deleteSchema}
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+      />
     </>
   );
 };
