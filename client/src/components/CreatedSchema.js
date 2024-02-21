@@ -35,18 +35,31 @@ const CreatedSchema = ({ schemaData, nav }) => {
 
   return (
     <>
-      <p>{schemaData.schemaName}</p>
-      <pre>{schemaData.schema}</pre>
-      <Button
-        onClick={() => {
-          nav(-1);
-        }}
-      >
-        Back
-      </Button>
-      <Button variant="danger" onClick={() => setModalShow(true)}>
-        Delete Schema
-      </Button>
+      <div>
+        <h6>Schema name: </h6>
+        <p>{schemaData.schemaName}</p>
+      </div>
+      <div>
+        <h6>DB Schema in JSON format: </h6>
+        <pre>{schemaData.schema}</pre>
+      </div>
+      <div>
+        <Button
+          className="schema-constructor-btn"
+          onClick={() => {
+            nav(-1);
+          }}
+        >
+          Back
+        </Button>
+        <Button
+          className="schema-constructor-btn"
+          variant="danger"
+          onClick={() => setModalShow(true)}
+        >
+          Delete Schema
+        </Button>
+      </div>
       <PopUp
         response={data}
         password={setPassword}

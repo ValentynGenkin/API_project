@@ -6,6 +6,7 @@ import RegistrationPage from './pages/RegistrationPage';
 import UserLayout from './components/UserLayout';
 import UserWelcomePage from './pages/UserWelcomePage';
 import SchemaPage from './pages/SchemaPage';
+import EndpointsPage from './pages/EndpointsPage';
 
 function App() {
   return (
@@ -19,7 +20,7 @@ function App() {
         <Route path="user-menu" element={<UserLayout />}>
           <Route index element={<UserWelcomePage />} />
           <Route path="schema" element={<SchemaPage />} />
-          <Route path="endpoint" element={<div></div>} />
+          <Route path="endpoint" element={<EndpointsPage />} />
         </Route>
 
         <Route path="*" element={<div>Page not found. Error 404</div>} />

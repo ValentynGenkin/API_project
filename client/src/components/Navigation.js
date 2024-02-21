@@ -20,7 +20,9 @@ const Navigation = () => {
           <Nav.Link as={Link} to={'schema'}>
             Schema
           </Nav.Link>
-          <Nav.Link as={Link}>Endpoints</Nav.Link>
+          <Nav.Link as={Link} to={'endpoint'}>
+            Endpoints
+          </Nav.Link>
           <Nav.Link as={Link}>Statistics</Nav.Link>
           <Nav.Link as={Link}>Account</Nav.Link>
         </Nav>
