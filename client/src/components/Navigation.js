@@ -27,7 +27,6 @@ const Navigation = () => {
     if (data && data.success) {
       navigation('/');
     }
-    console.log(data);
   }, [data]);
 
   return (
@@ -47,7 +46,9 @@ const Navigation = () => {
             <Nav.Link as={Link} to={'endpoint'}>
               Endpoints
             </Nav.Link>
-            <Nav.Link as={Link}>Statistics</Nav.Link>
+            <Nav.Link as={Link} to={'statistics'}>
+              Statistics
+            </Nav.Link>
             <Nav.Link as={Link}>Account</Nav.Link>
           </Nav>
           <Nav.Link

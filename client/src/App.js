@@ -7,6 +7,7 @@ import UserLayout from './components/UserLayout';
 import UserWelcomePage from './pages/UserWelcomePage';
 import SchemaPage from './pages/SchemaPage';
 import EndpointsPage from './pages/EndpointsPage';
+import StatisticsPage from './pages/StatisticsPage';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route index element={<UserWelcomePage />} />
           <Route path="schema" element={<SchemaPage />} />
           <Route path="endpoint" element={<EndpointsPage />} />
+          <Route path="statistics" element={<StatisticsPage />} />
         </Route>
 
         <Route path="*" element={<div>Page not found. Error 404</div>} />
