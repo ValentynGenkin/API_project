@@ -3,6 +3,8 @@ import Button from 'react-bootstrap/Button';
 import useFetch from '../hooks/useFetch';
 import PopUp from './PopUp';
 import { useNavigate } from 'react-router-dom';
+import APIDeleteBtn from './APIDeleteBtn';
+import DeleteAPIPopUpBody from './DeleteAPIPopUpBody';
 
 const CreatedSchema = ({ schemaData, nav }) => {
   const [modalShow, setModalShow] = useState(false);
@@ -60,11 +62,10 @@ const CreatedSchema = ({ schemaData, nav }) => {
         </Button>
       </div>
       <PopUp
+        btn={<APIDeleteBtn loading={isLoading} cb={deleteSchema} />}
         response={data}
-        password={setPassword}
-        loading={isLoading}
+        body={<DeleteAPIPopUpBody setPassword={setPassword} />}
         error={error}
-        deleteFunc={deleteSchema}
         show={modalShow}
         onHide={() => setModalShow(false)}
       />

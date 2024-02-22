@@ -64,6 +64,8 @@ const EndpointsPage = () => {
           <ExistEndpoints endpointName={authData.endpointName} />
         ) : (
           <CreateEndpoints
+            endpointName={endpointName}
+            loading={isLoading}
             createFunc={createEndpoints}
             setEndpointName={setEndpointName}
           />

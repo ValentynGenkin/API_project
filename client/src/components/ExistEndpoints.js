@@ -3,6 +3,8 @@ import Button from 'react-bootstrap/esm/Button';
 import { useNavigate } from 'react-router-dom';
 import useFetch from '../hooks/useFetch';
 import PopUp from './PopUp';
+import APIDeleteBtn from './APIDeleteBtn';
+import DeleteAPIPopUpBody from './DeleteAPIPopUpBody';
 
 const ExistEndpoints = ({ endpointName }) => {
   const [data, isLoading, error, fetchData] = useFetch(`api/schema/delete-api`);
@@ -162,11 +164,10 @@ const ExistEndpoints = ({ endpointName }) => {
         </Button>
       </div>
       <PopUp
+        btn={<APIDeleteBtn loading={isLoading} cb={deleteSchema} />}
         response={data}
-        password={setPassword}
-        loading={isLoading}
+        body={<DeleteAPIPopUpBody setPassword={setPassword} />}
         error={error}
-        deleteFunc={deleteSchema}
         show={modalShow}
         onHide={() => setModalShow(false)}
       />

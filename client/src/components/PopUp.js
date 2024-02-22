@@ -1,10 +1,9 @@
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
-import Spinner from 'react-bootstrap/esm/Spinner';
 
 const PopUp = (props) => {
-  const { deleteFunc, error, loading, password, response } = props;
+  const { btn, error, body, response } = props;
   return (
     <Modal
       {...props}
@@ -33,45 +32,12 @@ const PopUp = (props) => {
       ) : (
         <>
           <Modal.Body>
-            <Form.Label htmlFor="inputPassword5">Password</Form.Label>
-            <Form.Control
-              type="password"
-              id="schema-delete-password"
-              aria-describedby="schema-delete-password"
-              onChange={(e) => {
-                password(e.target.value);
-              }}
-            />
-            <Form.Text id="schema-delete-password" muted>
-              Once the deletion is confirmed, your API, database entries and
-              endpoints will be permanently deleted
-            </Form.Text>
+            <Form.Label htmlFor="schema-delete-password">Password</Form.Label>
+            {body}
             {error && <p>{error.msg}</p>}
           </Modal.Body>
           <Modal.Footer>
-            <Button
-              variant="danger"
-              onClick={() => {
-                deleteFunc();
-              }}
-            >
-              {loading ? (
-                <>
-                  {' '}
-                  <Spinner
-                    as="span"
-                    animation="border"
-                    size="sm"
-                    role="status"
-                    aria-hidden="true"
-                    className="loading-spinner"
-                  />
-                  <span className="visually-hidden">Loading...</span>
-                </>
-              ) : (
-                'Delete'
-              )}
-            </Button>
+            {btn}
             <Button onClick={props.onHide}>Close</Button>
           </Modal.Footer>
         </>
