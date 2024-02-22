@@ -23,6 +23,7 @@ const CreateEndpoints = ({
     <>
       <br />
       <h5>Create endpoints</h5>
+      <br />
       <div>
         <InputGroup
           className="mb-3"

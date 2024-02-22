@@ -14,6 +14,7 @@ authRouter.get('/authentication', authentication);
 authRouter.get('/schema-authentication', authentication);
 authRouter.get('/endpoint-authentication', authentication);
 authRouter.get('/statistics-authentication', authentication);
+authRouter.get('/account-authentication', authentication);
 authRouter.delete('/delete-user', deleteUser);
 
 export default authRouter;

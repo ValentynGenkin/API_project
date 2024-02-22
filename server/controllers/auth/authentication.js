@@ -72,6 +72,15 @@ export const authentication = async (req, res) => {
       });
     }
 
+    if (requestPath === '/account-authentication') {
+      const data = user.toObject();
+      delete data._id;
+      return res.status(200).json({
+        success: true,
+        account: data,
+      });
+    }
+
     return res.status(200).json({ success: true });
   } catch (error) {
     console.error('Authentication error', error);

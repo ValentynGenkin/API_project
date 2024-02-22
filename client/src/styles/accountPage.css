@@ -1,0 +1,36 @@
+.account-page-container {
+  min-height: calc(100vh - 100px);
+}
+
+.account-field {
+  border: 1px solid lightgrey;
+  border-radius: 5px;
+  margin: 10px;
+}
+.account-block {
+  margin: 0 auto;
+  max-width: 600px;
+}
+.account-field-badge {
+  background-color: rgb(226, 224, 224);
+  display: inline-block;
+  width: 120px;
+  font-size: 17px;
+  font-weight: bold;
+  padding: 8px;
+}
+
+.account-field-data {
+  font-size: 17px;
+  font-weight: 500;
+  margin-left: 40px;
+}
+
+.account-page-btn {
+  display: flex;
+  justify-content: center;
+}
+
+.account-page-btn button {
+  margin: 15px;
+}

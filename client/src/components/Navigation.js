@@ -49,7 +49,9 @@ const Navigation = () => {
             <Nav.Link as={Link} to={'statistics'}>
               Statistics
             </Nav.Link>
-            <Nav.Link as={Link}>Account</Nav.Link>
+            <Nav.Link as={Link} to={'account'}>
+              Account
+            </Nav.Link>
           </Nav>
           <Nav.Link
             onClick={() => {
