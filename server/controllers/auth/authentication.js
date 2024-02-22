@@ -1,6 +1,7 @@
 import dotenv from 'dotenv';
 import { verifyToken } from '../../util/verifyToken.js';
 import User from '../../db/models/userModel.js';
+import mongoose from 'mongoose';
 
 dotenv.config();
 
@@ -53,6 +54,21 @@ export const authentication = async (req, res) => {
       return res.status(200).json({
         success: true,
         endpointName: user.endpointName,
+      });
+    }
+
+    if (
+      requestPath === '/statistics-authentication' &&
+      user.endpointName &&
+      user.endpointName !== ''
+    ) {
+      const stat = await mongoose.connection
+        .collection(`${id}`)
+        .countDocuments();
+
+      return res.status(200).json({
+        success: true,
+        statistics: stat,
       });
     }
 

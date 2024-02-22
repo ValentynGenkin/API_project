@@ -69,11 +69,11 @@ export const deleteSchema = async (req, res) => {
       .toArray();
 
     const collectionExists = collections.some(
-      (collection) => collection.name === `${id}s`,
+      (collection) => collection.name === `${id}`,
     );
 
     if (collectionExists) {
-      await mongoose.connection.collection(`${id}s`).drop();
+      await mongoose.connection.collection(`${id}`).drop();
     }
 
     return res.status(200).json({
