@@ -7,6 +7,7 @@ import Button from 'react-bootstrap/Button';
 import PopUp from '../components/PopUp';
 import APIDeleteBtn from '../components/APIDeleteBtn';
 import DeleteAPIPopUpBody from '../components/DeleteAPIPopUpBody';
+import NewAPIKeyBtn from '../components/NewAPIkeyBtn';
 
 const AccountPage = () => {
   const [password, setPassword] = useState(null);
@@ -109,7 +110,7 @@ const AccountPage = () => {
               >
                 Back
               </Button>
-              <Button variant="warning">Get new API key</Button>
+              <NewAPIKeyBtn />
               <Button variant="danger" onClick={() => setModalShow(true)}>
                 Delete Account
               </Button>
