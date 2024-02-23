@@ -41,6 +41,8 @@ export const createEndpoints = async (req, res) => {
 
     await User.updateOne({ _id: id }, { $set: { endpointName: endpointName } });
 
+    const requestPath = req.url;
+
     return res.status(200).json({
       success: true,
       msg: 'Endpoints created successfully',

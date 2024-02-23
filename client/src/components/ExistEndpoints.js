@@ -151,9 +151,6 @@ const ExistEndpoints = ({ endpointName }) => {
         >
           Delete API
         </Button>
-        <Button className="schema-constructor-btn" variant="warning">
-          Update
-        </Button>
         <Button
           className="schema-constructor-btn"
           onClick={() => {
@@ -164,6 +161,7 @@ const ExistEndpoints = ({ endpointName }) => {
         </Button>
       </div>
       <PopUp
+        title={'Delete API'}
         btn={<APIDeleteBtn loading={isLoading} cb={deleteSchema} />}
         response={data}
         body={<DeleteAPIPopUpBody setPassword={setPassword} />}

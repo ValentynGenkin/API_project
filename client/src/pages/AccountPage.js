@@ -1,10 +1,16 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Container from 'react-bootstrap/esm/Container';
-import { default as useFetchAuth } from '../hooks/useFetch';
+import useFetch, { default as useFetchAuth } from '../hooks/useFetch';
 import '../styles/accountPage.css';
 import { useNavigate } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
+import PopUp from '../components/PopUp';
+import APIDeleteBtn from '../components/APIDeleteBtn';
+import DeleteAPIPopUpBody from '../components/DeleteAPIPopUpBody';
+
 const AccountPage = () => {
+  const [password, setPassword] = useState(null);
+  const [modalShow, setModalShow] = useState(false);
   const navigation = useNavigate();
   const [authData, , authError, authFetchData] = useFetchAuth(
     `api/auth/account-authentication`,
@@ -35,6 +41,29 @@ const AccountPage = () => {
 
     return `${year}-${month}-${day}`;
   };
+  const [data, isLoading, error, fetchData] = useFetch(`api/auth/delete-user`);
+
+  const deleteAccount = () => {
+    if (password) {
+      fetchData({
+        method: 'DELETE',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ password: `${password}` }),
+      });
+    }
+  };
+
+  useEffect(() => {
+    if (data && data.success) {
+      setTimeout(() => {
+        navigation('/');
+      }, 2000);
+    }
+  }, [data]);
+
   return (
     <Container className="account-page-container">
       {authData && (
@@ -81,9 +110,20 @@ const AccountPage = () => {
                 Back
               </Button>
               <Button variant="warning">Get new API key</Button>
-              <Button variant="danger">Delete Account</Button>
+              <Button variant="danger" onClick={() => setModalShow(true)}>
+                Delete Account
+              </Button>
             </div>
           </div>
+          <PopUp
+            title={'Delete user account'}
+            btn={<APIDeleteBtn loading={isLoading} cb={deleteAccount} />}
+            response={data}
+            body={<DeleteAPIPopUpBody setPassword={setPassword} />}
+            error={error}
+            show={modalShow}
+            onHide={() => setModalShow(false)}
+          />
         </>
       )}
     </Container>

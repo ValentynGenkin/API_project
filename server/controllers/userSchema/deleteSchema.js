@@ -4,6 +4,7 @@ import { comparePassword } from '../../util/comparePassword.js';
 import { verifyToken } from '../../util/verifyToken.js';
 import { rm } from 'fs/promises';
 import { checkFolderExistence } from '../../util/checkFolderExistence.js';
+import { checkLastCharacter } from '../../util/lastCharacterCheck.js';
 
 export const deleteSchema = async (req, res) => {
   try {
@@ -69,11 +70,11 @@ export const deleteSchema = async (req, res) => {
       .toArray();
 
     const collectionExists = collections.some(
-      (collection) => collection.name === `${id}`,
+      (collection) => collection.name === checkLastCharacter(id),
     );
 
     if (collectionExists) {
-      await mongoose.connection.collection(`${id}`).drop();
+      await mongoose.connection.collection(checkLastCharacter(id)).drop();
     }
 
     return res.status(200).json({

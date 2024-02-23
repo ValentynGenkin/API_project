@@ -3,7 +3,7 @@ import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 
 const PopUp = (props) => {
-  const { btn, error, body, response } = props;
+  const { btn, error, body, response, title } = props;
   return (
     <Modal
       {...props}
@@ -12,12 +12,12 @@ const PopUp = (props) => {
       centered
     >
       <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">Delete API</Modal.Title>
+        <Modal.Title id="contained-modal-title-vcenter">{title}</Modal.Title>
       </Modal.Header>
       {response && response.success ? (
         <>
           <Modal.Body>
-            <h5>API deleted successfully</h5>
+            <h5>Deleted successfully</h5>
           </Modal.Body>
           <Modal.Footer>
             <Button

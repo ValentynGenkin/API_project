@@ -62,6 +62,7 @@ const CreatedSchema = ({ schemaData, nav }) => {
         </Button>
       </div>
       <PopUp
+        title={'Delete API'}
         btn={<APIDeleteBtn loading={isLoading} cb={deleteSchema} />}
         response={data}
         body={<DeleteAPIPopUpBody setPassword={setPassword} />}

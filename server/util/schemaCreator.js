@@ -14,7 +14,9 @@ export const createNewSchema = async (userId, schemaName, data) => {
     const Schema${schemaName} = new mongoose.Schema(
 
       ${preparedData}
-      , { versionKey: false ,
+      , { 
+        strict: 'throw',
+        versionKey: false ,
         capped: {
         size: 1048576, 
         max: 1000 
