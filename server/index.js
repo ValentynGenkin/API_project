@@ -1,7 +1,5 @@
-import dotenv from 'dotenv';
 import connectDB from './db/connectDB.js';
 import app from './app.js';
-dotenv.config();
 
 const PORT = process.env.SERVER_URL || 5000;
 
@@ -12,6 +10,7 @@ if (PORT === null) {
 const startServer = async () => {
   try {
     await connectDB();
+
     app.listen(PORT, () => {
       console.log(`Server started on port: ${PORT}`);
     });
