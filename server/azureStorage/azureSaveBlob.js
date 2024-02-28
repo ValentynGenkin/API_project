@@ -1,8 +1,9 @@
 import dotenv from 'dotenv';
 import { BlobServiceClient } from '@azure/storage-blob';
+import User from '../db/models/userModel.js';
 
 dotenv.config();
-export const azureSaveBlob = async (blob, schemaFile) => {
+export const azureSaveBlob = async (id, blob, schemaFile) => {
   try {
     const AZURE_STORAGE_CONNECTION_STRING =
       process.env.AZURE_STORAGE_CONNECTION_STRING;
@@ -25,17 +26,13 @@ export const azureSaveBlob = async (blob, schemaFile) => {
       await containerClient.exists();
     }
 
-    // Get a block blob client
     const blockBlobClient = containerClient.getBlockBlobClient(schemaFile);
 
-    // Display blob name and url
-    console.log(
-      `\nUploading to Azure storage as blob\n\tname: ${schemaFile}:\n\tURL: ${blockBlobClient.url}`,
-    );
+    await blockBlobClient.upload(blob, blob.length);
 
-    const uploadBlobResponse = await blockBlobClient.upload(blob, blob.length);
-    console.log(
-      `Blob was uploaded successfully. requestId: ${uploadBlobResponse.requestId}`,
+    await User.updateOne(
+      { _id: id },
+      { $set: { schemaUrl: blockBlobClient.url } },
     );
   } catch (error) {
     console.error(error);

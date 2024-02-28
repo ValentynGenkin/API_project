@@ -43,6 +43,10 @@ const userSchema = new mongoose.Schema(
       type: String,
       require: false,
     },
+    schemaUrl: {
+      type: String,
+      required: false,
+    },
   },
   { versionKey: false },
 );
