@@ -4,6 +4,7 @@ import { DBModelImport } from '../../util/DBModelImport.js';
 import { verifyToken } from '../../util/verifyToken.js';
 import { checkDataForUpdate } from '../../util/checkDataForUpdate.js';
 import { requestValidation } from '../../util/requestValidation.js';
+import { importModuleFromBlob } from '../../azureStorage/importModuleFromBlob.js';
 
 export const updateItem = async (req, res) => {
   try {
@@ -60,14 +61,13 @@ export const updateItem = async (req, res) => {
       userData.user.endpointName === endpoint &&
       tokenID === userData.user.id.toString()
     ) {
-      const DBModel = await DBModelImport(
+      const DBModel = await importModuleFromBlob(
+        userData.user.schemaUrl,
         userData.user.id,
         userData.user.schemaName,
       );
 
-      const model = DBModel.default;
-
-      const schemaFields = await model.schema.obj;
+      const schemaFields = await DBModel.schema.obj;
 
       const dataCheck = checkDataForUpdate(schemaFields, data);
 
@@ -78,7 +78,7 @@ export const updateItem = async (req, res) => {
         });
       }
 
-      const updatedItem = await model.findByIdAndUpdate(id, data);
+      const updatedItem = await DBModel.findByIdAndUpdate(id, data);
 
       if (!updatedItem) {
         return res.status(404).json({
