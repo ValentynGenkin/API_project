@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 import { APIkeyControl } from '../../util/APIKeyControl.js';
 import { DBModelImport } from '../../util/DBModelImport.js';
+import { importModuleFromBlob } from '../../azureStorage/importModuleFromBlob.js';
 
 export const getItems = async (req, res) => {
   try {
@@ -43,13 +44,13 @@ export const getItems = async (req, res) => {
     }
 
     if (userData.success && userData.user.endpointName === endpoint) {
-      const DBModel = await DBModelImport(
+      const DBModel = await importModuleFromBlob(
+        userData.user.schemaUrl,
         userData.user.id,
         userData.user.schemaName,
       );
-      const model = DBModel.default;
 
-      const data = id ? await model.findById(id) : await model.find({});
+      const data = id ? await DBModel.findById(id) : await DBModel.find({});
 
       return res
         .status(200)
