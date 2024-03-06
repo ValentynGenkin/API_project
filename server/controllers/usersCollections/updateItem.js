@@ -1,6 +1,5 @@
 import mongoose from 'mongoose';
 import { APIkeyControl } from '../../util/APIKeyControl.js';
-import { DBModelImport } from '../../util/DBModelImport.js';
 import { verifyToken } from '../../util/verifyToken.js';
 import { checkDataForUpdate } from '../../util/checkDataForUpdate.js';
 import { requestValidation } from '../../util/requestValidation.js';

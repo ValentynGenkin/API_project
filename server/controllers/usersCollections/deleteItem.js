@@ -1,8 +1,8 @@
 import mongoose from 'mongoose';
 import { APIkeyControl } from '../../util/APIKeyControl.js';
-import { DBModelImport } from '../../util/DBModelImport.js';
 import { verifyToken } from '../../util/verifyToken.js';
 import { requestValidation } from '../../util/requestValidation.js';
+import { importModuleFromBlob } from '../../azureStorage/importModuleFromBlob.js';
 
 export const deleteItem = async (req, res) => {
   try {
@@ -51,14 +51,13 @@ export const deleteItem = async (req, res) => {
       userData.user.endpointName === endpoint &&
       tokenID === userData.user.id.toString()
     ) {
-      const DBModel = await DBModelImport(
+      const DBModel = await importModuleFromBlob(
+        userData.user.schemaUrl,
         userData.user.id,
         userData.user.schemaName,
       );
 
-      const model = DBModel.default;
-
-      const idToDelete = id ? await model.findByIdAndDelete(id) : null;
+      const idToDelete = id ? await DBModel.findByIdAndDelete(id) : null;
 
       return res.status(200).json(
         idToDelete
