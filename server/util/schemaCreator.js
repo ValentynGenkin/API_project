@@ -8,27 +8,27 @@ export const createNewSchema = async (userId, schemaName, data) => {
     const schemaFile = `${schemaName}.js`;
 
     // await mkdir(folderPath, { recursive: true });
-    const preparedData = data.replace(/["']/g, '');
+    const preparedData = data;
 
-    const schemaData = `
-    import mongoose from 'mongoose';
+    // const schemaData = `
+    // import mongoose from 'mongoose';
 
-    const Schema${schemaName} = new mongoose.Schema(
+    // const Schema${schemaName} = new mongoose.Schema(
 
-      ${preparedData}
-      , { 
-        strict: 'throw',
-        versionKey: false ,
-        capped: {
-        size: 1048576, 
-        max: 1000 
-      } }
-    );
-    const id_${userId} = mongoose.model("${userId}", Schema${schemaName});
+    //   ${preparedData}
+    //   , {
+    //     strict: 'throw',
+    //     versionKey: false ,
+    //     capped: {
+    //     size: 1048576,
+    //     max: 1000
+    //   } }
+    // );
+    // const id_${userId} = mongoose.model("${userId}", Schema${schemaName});
 
-    export default id_${userId};
-    `;
-    await azureSaveBlob(userId, schemaData, schemaFile);
+    // export default id_${userId};
+    // `;
+    await azureSaveBlob(userId, preparedData, schemaFile);
     // await writeFile(filePath, schemaData, 'utf-8');
 
     return {

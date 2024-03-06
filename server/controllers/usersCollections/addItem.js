@@ -2,6 +2,7 @@ import { APIkeyControl } from '../../util/APIKeyControl.js';
 import { DBModelImport } from '../../util/DBModelImport.js';
 import { requestValidation } from '../../util/requestValidation.js';
 import { verifyToken } from '../../util/verifyToken.js';
+import { importModuleFromBlob } from '../../azureStorage/importModuleFromBlob.js';
 
 export const addItem = async (req, res) => {
   try {
@@ -44,14 +45,21 @@ export const addItem = async (req, res) => {
       userData.user.endpointName === endpoint &&
       tokenID === userData.user.id.toString()
     ) {
-      const DBModel = await DBModelImport(
+      // const DBModel = await DBModelImport(
+      //   userData.user.id,
+      //   userData.user.schemaName,
+      // );
+
+      const DBModel = await importModuleFromBlob(
+        userData.user.schemaUrl,
         userData.user.id,
         userData.user.schemaName,
       );
 
-      const model = DBModel.default;
+      console.log(userData.user.schemaUrl);
+      // const model = DBModel.default;
 
-      await model.create(data);
+      await DBModel.create(data);
 
       return res.status(200).json({
         msg: 'Data successfully created',

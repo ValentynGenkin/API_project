@@ -18,6 +18,7 @@ export const APIkeyControl = async (apiKey) => {
               id: user._id,
               endpointName: user.endpointName,
               schemaName: user.schemaName,
+              schemaUrl: user.schemaUrl,
             },
           };
     }
