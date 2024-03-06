@@ -16,7 +16,7 @@ export const azureSaveBlob = async (id, blob, schemaFile) => {
       AZURE_STORAGE_CONNECTION_STRING,
     );
 
-    const containerName = 'schemascreatedbyusers';
+    const containerName = process.env.AZURE_CONTAINER;
 
     const containerClient = blobServiceClient.getContainerClient(containerName);
 
