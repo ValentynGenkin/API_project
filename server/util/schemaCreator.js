@@ -4,9 +4,7 @@ export const createNewSchema = async (userId, schemaName, data) => {
   try {
     const schemaFile = `${schemaName}_${userId}.js`;
 
-    const preparedData = data;
-
-    await azureSaveBlob(userId, preparedData, schemaFile);
+    await azureSaveBlob(userId, data, schemaFile);
 
     return {
       success: true,

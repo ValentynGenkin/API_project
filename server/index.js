@@ -1,7 +1,7 @@
 import connectDB from './db/connectDB.js';
 import app from './app.js';
 
-const PORT = process.env.SERVER_URL || 5000;
+const PORT = process.env.PORT || 5000;
 
 if (PORT === null) {
   console.error('Server port Error');

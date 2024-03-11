@@ -1,6 +1,5 @@
 import mongoose from 'mongoose';
 import { APIkeyControl } from '../../util/APIKeyControl.js';
-import { DBModelImport } from '../../util/DBModelImport.js';
 import { importModuleFromBlob } from '../../azureStorage/importModuleFromBlob.js';
 
 export const getItems = async (req, res) => {
