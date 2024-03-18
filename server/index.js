@@ -1,5 +1,6 @@
 import connectDB from './db/connectDB.js';
 import app from './app.js';
+import express from 'express';
 
 const PORT = process.env.PORT || 5000;
 
@@ -17,5 +18,7 @@ const startServer = async () => {
     throw new Error(`Error: ${error}`);
   }
 };
+
+app.use(express.static(new URL('../../client/dist', import.meta.url).pathname));
 
 startServer();
