@@ -9,7 +9,7 @@ import UserTextBlock from '../components/UserTextBlock';
 const UserWelcomePage = () => {
   const navigation = useNavigate();
   const [authData, , authError, authFetchData] = useFetchAuth(
-    `api/auth/authentication`,
+    `/api/auth/authentication`,
   );
 
   useEffect(() => {
