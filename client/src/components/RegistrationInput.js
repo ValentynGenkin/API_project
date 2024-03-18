@@ -59,7 +59,7 @@ function RegistrationInput() {
   return (
     <>
       <div className="registration-form-inputs-container">
-        <h4 className="registration-form-title">Registration from</h4>
+        <h4 className="registration-form-title">Registration form</h4>
         <div className="registration-form-input">
           <Form.Label htmlFor="registration-first-name">First name</Form.Label>
           <Form.Control
