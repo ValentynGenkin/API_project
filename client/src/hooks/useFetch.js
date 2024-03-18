@@ -8,7 +8,10 @@ function useFetch(url) {
   const fetchData = async (options) => {
     try {
       setIsLoading(true);
-      const response = await fetch(`${url}`, options);
+      const response = await fetch(
+        `${process.env.REACT_APP_DEV_SERVER}/${url}`,
+        options,
+      );
 
       if (!response.ok) {
         const jsonResult = await response.json();

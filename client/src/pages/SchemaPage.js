@@ -21,7 +21,7 @@ import CreatedSchema from '../components/ExistSchema';
 const SchemaPage = () => {
   const navigation = useNavigate();
   const [authData, , authError, authFetchData] = useFetchAuth(
-    `/api/auth/schema-authentication`,
+    `api/auth/schema-authentication`,
   );
 
   useEffect(() => {
