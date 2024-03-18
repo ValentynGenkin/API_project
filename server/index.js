@@ -20,12 +20,10 @@ const startServer = async () => {
 };
 
 if (process.env.NODE_ENV === 'production') {
-  app.use(
-    express.static(new URL('../../client/build', import.meta.url).pathname),
-  );
+  app.use(express.static(new URL('../client/build', import.meta.url).pathname));
   app.get('*', (req, res) =>
     res.sendFile(
-      new URL('../../client/build/index.html', import.meta.url).pathname,
+      new URL('../client/build/index.html', import.meta.url).pathname,
     ),
   );
 }
