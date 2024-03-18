@@ -12,7 +12,7 @@ app.use(express.urlencoded({ extended: true }));
 
 const origin =
   process.env.NODE_ENV === 'production'
-    ? 'https://api-creator.herokuapp.com'
+    ? 'https://api-creator-49b94993b404.herokuapp.com'
     : 'http://localhost:3000';
 
 app.use(cors({ origin, credentials: true }));
