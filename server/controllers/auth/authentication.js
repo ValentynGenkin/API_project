@@ -33,6 +33,7 @@ export const authentication = async (req, res) => {
     }
 
     const requestPath = req.url;
+    console.log(requestPath);
 
     if (
       requestPath === '/schema-authentication' &&
