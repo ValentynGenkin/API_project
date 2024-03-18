@@ -10,7 +10,8 @@
     "build:client": "cd client && npm run build",
     "setup": "npm install && npm-run-all -p setup:client setup:server",
     "setup:client": "cd client && npm install",
-    "setup:server": "cd server && npm install"
+    "setup:server": "cd server && npm install",
+    "heroku-postbuild": "npm run setup && npm run build:client"
   },
   "author": "",
   "license": "ISC",
