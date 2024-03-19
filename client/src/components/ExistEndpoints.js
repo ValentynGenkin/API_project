@@ -44,7 +44,7 @@ const ExistEndpoints = ({ endpointName }) => {
             method: <b>POST</b>{' '}
           </p>
           <p>
-            Request: {process.env.REACT_APP_DEV_SERVER}
+            Request: {process.env.REACT_APP_DEV_SERVER}/api/custom-rout/
             {endpointName}/add
           </p>
         </div>
@@ -54,7 +54,7 @@ const ExistEndpoints = ({ endpointName }) => {
             method: <b>GET</b>
           </p>
           <p>
-            Request: {process.env.REACT_APP_DEV_SERVER}
+            Request: {process.env.REACT_APP_DEV_SERVER}/api/custom-rout/
             {endpointName}/get
           </p>
         </div>
@@ -64,7 +64,7 @@ const ExistEndpoints = ({ endpointName }) => {
             method: <b>GET</b>
           </p>
           <p>
-            Request: {process.env.REACT_APP_DEV_SERVER}
+            Request: {process.env.REACT_APP_DEV_SERVER}/api/custom-rout/
             {endpointName}
             /get/?id=ITEM_ID
           </p>
@@ -75,7 +75,7 @@ const ExistEndpoints = ({ endpointName }) => {
             method: <b> PUT</b>
           </p>
           <p>
-            Request: {process.env.REACT_APP_DEV_SERVER}
+            Request: {process.env.REACT_APP_DEV_SERVER}/api/custom-rout/
             {endpointName}
             /update/?id=ITEM_ID
           </p>
@@ -87,7 +87,7 @@ const ExistEndpoints = ({ endpointName }) => {
             method: <b>DELETE</b>
           </p>
           <p>
-            Request: {process.env.REACT_APP_DEV_SERVER}
+            Request: {process.env.REACT_APP_DEV_SERVER}/api/custom-rout/
             {endpointName}
             /delete/?id=ITEM_ID
           </p>
@@ -100,7 +100,7 @@ const ExistEndpoints = ({ endpointName }) => {
           {`
   JavaScript and Fetch API:
 
-  fetch(${process.env.REACT_APP_DEV_SERVER}${endpointName}/GET ,{
+  fetch(${process.env.REACT_APP_DEV_SERVER}/api/custom-rout/${endpointName}/GET ,{
     method: 'GET',
     credentials: 'include',
     headers: {
@@ -120,7 +120,7 @@ const ExistEndpoints = ({ endpointName }) => {
   JavaScript and Axios:
 
   try {
-    const response = await axios.post(${process.env.REACT_APP_DEV_SERVER}${endpointName}/add, {
+    const response = await axios.post(${process.env.REACT_APP_DEV_SERVER}/api/custom-rout/${endpointName}/add, {
       {
         data: {
         request body according to your schema
