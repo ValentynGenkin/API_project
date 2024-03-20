@@ -2,9 +2,8 @@ import mongoose from 'mongoose';
 import User from '../../db/models/userModel.js';
 import { comparePassword } from '../../util/comparePassword.js';
 import { verifyToken } from '../../util/verifyToken.js';
-import { rm } from 'fs/promises';
-import { checkFolderExistence } from '../../util/checkFolderExistence.js';
 import { checkLastCharacter } from '../../util/lastCharacterCheck.js';
+import { deleteBlob } from '../../azureStorage/deleteBlob.js';
 
 export const deleteSchema = async (req, res) => {
   try {
@@ -44,6 +43,8 @@ export const deleteSchema = async (req, res) => {
       });
     }
 
+    await deleteBlob(id, user.schemaName);
+
     await User.updateOne(
       { _id: id },
       {
@@ -51,19 +52,10 @@ export const deleteSchema = async (req, res) => {
           schemaName: '',
           endpointName: '',
           schemaStructure: '',
+          schemaUrl: '',
         },
       },
     );
-
-    const folderExists = await checkFolderExistence(
-      `./db/models/modelsCreatedByUsers/${id}`,
-    );
-
-    if (folderExists) {
-      await rm(`./db/models/modelsCreatedByUsers/${id}`, {
-        recursive: true,
-      });
-    }
 
     const collections = await mongoose.connection.db
       .listCollections()
