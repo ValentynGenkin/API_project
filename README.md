@@ -1,70 +1,26 @@
-# Getting Started with Create React App
+[![smartmockups-ltzo773m.jpg](https://i.postimg.cc/brR9CnKk/smartmockups-ltzo773m.jpg)](https://postimg.cc/64yZT86p)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Demo
 
-## Available Scripts
+[APP Link](https://api-creator-49b94993b404.herokuapp.com/)
 
-In the project directory, you can run:
+This tool allows you to effortlessly create your own API. Simply follow a few steps to set up your MongoDB schema and define standard endpoints for basic CRUD operations (Create, Read, Update, Delete).
 
-### `npm start`
+1. Create MongoDB Schema: Define the data structure for your API by selecting the necessary fields. Our tool will automatically generate a ready-to-use MongoDB schema for you.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+2. Define Standard CRUD Endpoints: You have four standard endpoints for basic operations:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- Create: Add new data to your database.
 
-### `npm test`
+- Read: Retrieve data from the database for viewing or using in your application.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Update: Modify existing data in the database according to your needs.
 
-### `npm run build`
+- Delete: Remove data from the database that you no longer need.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+3. Integrate Your API: Get the generated generated endpoints and easily integrate it into your application. Your API is now ready to use with four standard CRUD endpoints.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Used Technology and Frameworks
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+`Node.js` `Express.js` `MongoDB` `Azure Blob Storage` `React` `Bootstrap`
