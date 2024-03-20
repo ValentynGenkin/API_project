@@ -2,7 +2,7 @@ import React from 'react';
 
 const WelcomeTextBlock = () => {
   return (
-    <div>
+    <div className="welcome-text-block">
       <h3>Welcome to Your Personal API Generator!</h3>
       <p>
         This tool allows you to effortlessly create your own API. Simply follow

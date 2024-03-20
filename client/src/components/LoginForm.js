@@ -64,23 +64,23 @@ const LoginForm = () => {
         <div className="login-form-block">
           <Form className="login-form">
             <Form.Group
-              className="mb-3"
+              className="mb-3 login-form-input"
               onChange={(e) => {
                 setEmail(e.target.value);
               }}
             >
-              <Form.Label>Email</Form.Label>
               <Form.Control type="email" placeholder="Email" />
             </Form.Group>
             <Form.Group
-              className="mb-3"
+              className="mb-3 login-form-input"
               onChange={(e) => {
                 setPassword(e.target.value);
               }}
             >
-              <Form.Label>Password</Form.Label>
               <Form.Control type="password" placeholder="Password" />
             </Form.Group>
+          </Form>
+          <div className="login-form-btn-block">
             <p className="text-muted login-form-registration">
               Don't have an account?{' '}
               <Link to={'registration'}>Registration</Link>
@@ -114,9 +114,9 @@ const LoginForm = () => {
                 'Login'
               )}
             </Button>
-            {loginError ? <p>Check email and/or login</p> : null}
-            {error && <p>{error.msg}</p>}
-          </Form>
+          </div>
+          {loginError ? <p>Check email and/or login</p> : null}
+          {error && <p>{error.msg}</p>}
         </div>
       )}
     </>
