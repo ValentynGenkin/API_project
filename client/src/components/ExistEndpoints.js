@@ -36,6 +36,48 @@ const ExistEndpoints = ({ endpointName }) => {
   return (
     <>
       <br />
+      <hr />
+      <p>Important!</p>
+      <p>
+        You must be logged to create and update data (methods: POST, UPDATE and
+        DELETE). Once you log in, you will receive an access token in your
+        cookies. The token expires 3 hours after login. To receive data, you
+        only need to use the API key.
+      </p>
+      <div className="exist-endpoint">
+        <span>Login</span>
+        <p className="exist-endpoint-method">
+          method: <b>POST</b>
+        </p>
+        <p>Request: {process.env.REACT_APP_DEV_SERVER}/api/auth/login</p>
+      </div>
+      <pre>
+        {`Request body: 
+      {
+        "email": "your_email",
+        "password": "your_password"
+      }`}
+      </pre>
+      <pre className="fetch-example">
+        {`
+  Example: 
+
+  fetch('${process.env.REACT_APP_DEV_SERVER}/api/auth/login' ,{
+    method: 'POST',
+    credentials: 'include',
+    headers: {
+      'Content-Type': 'application/json',
+    }
+    body: JSON.stringify({
+      email: "your_email",
+      password: "your_password",
+    }),
+  })
+  .then ... 
+  `}
+      </pre>
+      <hr />
+      <br />
       <h5>Endpoints</h5>
       <div className="exist-endpoints-block">
         <div className="exist-endpoint">
@@ -100,7 +142,7 @@ const ExistEndpoints = ({ endpointName }) => {
           {`
   JavaScript and Fetch API:
 
-  fetch(${process.env.REACT_APP_DEV_SERVER}/api/custom-rout/${endpointName}/GET ,{
+  fetch('${process.env.REACT_APP_DEV_SERVER}/api/custom-rout/${endpointName}/get' ,{
     method: 'GET',
     credentials: 'include',
     headers: {
@@ -120,7 +162,7 @@ const ExistEndpoints = ({ endpointName }) => {
   JavaScript and Axios:
 
   try {
-    const response = await axios.post(${process.env.REACT_APP_DEV_SERVER}/api/custom-rout/${endpointName}/add, {
+    const response = await axios.post('${process.env.REACT_APP_DEV_SERVER}/api/custom-rout/${endpointName}/add', {
       {
         data: {
         request body according to your schema
